@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using JoostenProductions;
+﻿using JoostenProductions;
 using Tools;
 using UnityEngine;
 
