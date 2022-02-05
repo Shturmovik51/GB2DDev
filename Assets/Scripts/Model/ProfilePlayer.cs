@@ -3,10 +3,10 @@ using Tools;
 
 public class ProfilePlayer
 {
-    public ProfilePlayer(float speedCar)
+    public ProfilePlayer(float speedCar, int fuel)
     {
         CurrentState = new SubscriptionProperty<GameState>();
-        CurrentCar = new Car(speedCar);
+        CurrentCar = new Car(speedCar, fuel);
     }
 
     public SubscriptionProperty<GameState> CurrentState { get; }

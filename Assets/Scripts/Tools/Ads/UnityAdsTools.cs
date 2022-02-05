@@ -6,10 +6,13 @@ namespace Tools.Ads
 {
     internal class UnityAdsTools : MonoBehaviour, IAdsShower, IUnityAdsListener
     {
-        private string _gameId = "4593577";
-        private string _rewardPlace = "rewardAds";
-        private string _interstitialPlace = "Interstitial_Android";
+        // private string _gameId = "4593577";
+        //private string _rewardPlace = "rewardAds";
+        // private string _interstitialPlace = "Interstitial_Android";
 
+        private string _gameId = "4598009";
+        private string _rewardPlace = "rewardAds";
+        private string _interstitialPlace = "Android_Car_Interstitial";
 
         private Action _callbackSuccessShowVideo;
 

@@ -14,8 +14,8 @@ public class Root : MonoBehaviour
     private IAnalyticTools _analyticsTools;
 
     private void Awake()
-    {
-        var profilePlayer = new ProfilePlayer(15f);
+    { 
+        var profilePlayer = new ProfilePlayer(15f, 0);
         _analyticsTools = new UnityAnalyticTools();
         profilePlayer.CurrentState.Value = GameState.Start;
         _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads);

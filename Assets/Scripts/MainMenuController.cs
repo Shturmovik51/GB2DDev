@@ -18,7 +18,7 @@ public class MainMenuController : BaseController
         _analytics = analytics;
         _ads = ads;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame);
+        _view.Init(StartGame, profilePlayer.CurrentCar.Fuel);
     }
 
     private MainMenuView LoadView(Transform placeForUi)

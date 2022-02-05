@@ -9,12 +9,18 @@ public class GameController : BaseController
         
         var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
         AddController(tapeBackgroundController);
-        
-        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
-        AddController(inputGameController);
-            
+
         var carController = new CarController();
         AddController(carController);
+
+        var fuelController = new FuelController(profilePlayer.CurrentCar.Fuel, carController.GetCarView());
+        fuelController.UpdateView();
+        AddController(fuelController);
+
+        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar, fuelController);
+        AddController(inputGameController);
+            
+
     }
 }
 

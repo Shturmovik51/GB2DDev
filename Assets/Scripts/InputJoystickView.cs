@@ -5,9 +5,9 @@ using UnityStandardAssets.CrossPlatformInput;
 
 internal class InputJoystickView : BaseInputView
 {
-    public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed)
+    public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed, FuelController fuelController)
     {
-        base.Init(leftMove, rightMove, speed);
+        base.Init(leftMove, rightMove, speed, fuelController);
         UpdateManager.SubscribeToUpdate(Move);
     }
 
