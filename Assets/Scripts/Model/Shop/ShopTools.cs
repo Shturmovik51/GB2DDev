@@ -7,7 +7,7 @@ using UnityEngine.Purchasing.Security;
 
 namespace Model.Shop
 {
-    internal class ShopTools: IShop, IStoreListener
+    public class ShopTools: IShop, IStoreListener
     {
         private IStoreController _controller;
         private IExtensionProvider _extensionProvider;
@@ -46,30 +46,30 @@ namespace Model.Shop
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
-            bool validPurchase = false;
+            bool validPurchase = true;
 #if UNITY_ANDROID || UNITY_IOS
-            CrossPlatformValidator validator = new CrossPlatformValidator(GooglePlayTangle.Data(),
-                AppleTangle.Data(), Application.identifier);
-            try
-            {
-                IPurchaseReceipt[] result = validator.Validate(purchaseEvent.purchasedProduct.receipt);
-                validPurchase = true;
-                foreach (IPurchaseReceipt productReceipt in result)
-                {
-                    validPurchase &= productReceipt.purchaseDate == DateTime.UtcNow;
-                }
+            //CrossPlatformValidator validator = new CrossPlatformValidator(GooglePlayTangle.Data(),
+            //    AppleTangle.Data(), Application.identifier);
+            //try
+            //{
+            //    IPurchaseReceipt[] result = validator.Validate(purchaseEvent.purchasedProduct.receipt);
+            //    validPurchase = true;
+            //    foreach (IPurchaseReceipt productReceipt in result)
+            //    {
+            //        validPurchase &= productReceipt.purchaseDate == DateTime.UtcNow;
+            //    }
 
-            }
-            catch (IAPSecurityException)
-            {
-                Debug.Log("Invalid receipt, not unlocking content");
-                validPurchase = false;
-            }
+            //}
+            //catch (IAPSecurityException)
+            //{
+            //    Debug.Log("Invalid receipt, not unlocking content");
+            //    validPurchase = false;
+            //}
 #endif
             if(validPurchase)
                 _onSuccessPurchase.Invoke();
-            return PurchaseProcessingResult.Complete;
 
+            return PurchaseProcessingResult.Complete;
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)

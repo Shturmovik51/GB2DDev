@@ -2,9 +2,15 @@
 
 namespace Model.Shop
 {
-    internal class ShopProduct
+    public class ShopProduct
     {
         public string Id;
         public ProductType CurrentProductType;
+
+        public ShopProduct(string id, ProductType productType)
+        {
+            Id = id;
+            CurrentProductType = productType;
+        }
     }
 }

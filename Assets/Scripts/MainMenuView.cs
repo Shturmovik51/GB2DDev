@@ -12,7 +12,12 @@ public class MainMenuView : MonoBehaviour
     public void Init(UnityAction startGame, int fuel)
     {
         _buttonStart.onClick.AddListener(startGame);
-        _fuelCount.text = fuel.ToString();
+        UpdateFuelCount(fuel);
+    }
+
+    public void UpdateFuelCount(int value)
+    {
+        _fuelCount.text = value.ToString();
     }
 
     protected void OnDestroy()
