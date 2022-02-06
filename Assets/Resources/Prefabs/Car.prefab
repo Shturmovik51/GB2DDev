@@ -412,6 +412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fuelText: {fileID: 1555410566582034656}
+  LeftWhell: {fileID: 2888579476072394851}
+  RightWhell: {fileID: 1959354338043260515}
 --- !u!1 &8451805597918948043
 GameObject:
   m_ObjectHideFlags: 0

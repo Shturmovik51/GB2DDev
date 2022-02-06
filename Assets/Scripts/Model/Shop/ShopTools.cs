@@ -66,15 +66,16 @@ namespace Model.Shop
             //    validPurchase = false;
             //}
 #endif
+            
             if(validPurchase)
-                _onSuccessPurchase.Invoke();
+                _onSuccessPurchase.Invoke(purchaseEvent.purchasedProduct.definition.id);
 
             return PurchaseProcessingResult.Complete;
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
-            _onFailedPurchase.Invoke();
+            _onFailedPurchase.Invoke(product.definition.id);
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

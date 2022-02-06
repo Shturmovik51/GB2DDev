@@ -27,11 +27,12 @@ public class MainMenuController : BaseController
 
         var products = new List<ShopProduct>()
         {
-            new ShopProduct("com.c1.racing.fuel", UnityEngine.Purchasing.ProductType.NonConsumable),
+            new ShopProduct("com.c1.racing.fuel", UnityEngine.Purchasing.ProductType.NonConsumable, 100, TypeOfProduct.Fuel),
+            new ShopProduct("com.c1.racing.goldPack", UnityEngine.Purchasing.ProductType.NonConsumable, 50, TypeOfProduct.Gold),
         };
 
         _shopTools = new ShopTools(products);
-        _shopController = new ShopController(_profilePlayer, _shopTools, _view);
+        _shopController = new ShopController(_profilePlayer, _shopTools, _view, products);
     }
 
     private MainMenuView LoadView(Transform placeForUi)

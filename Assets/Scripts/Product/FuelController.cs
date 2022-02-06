@@ -14,6 +14,11 @@ public class FuelController : BaseController
         _carView = carView;
     }
 
+    public void RotateGarWheels(float value)
+    {
+        _carView.RotateWheels(value);
+    }
+
     public void DecreaseFuel()
     {
         FuelCount--;

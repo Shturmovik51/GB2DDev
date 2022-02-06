@@ -4,7 +4,7 @@ namespace Tools
 {
     public interface IReadOnlySubscriptionAction
     {
-        void SubscribeOnChange(Action subscriptionAction);
-        void UnSubscriptionOnChange(Action unsubscriptionAction);
+        void SubscribeOnChange(Action<string> subscriptionAction);
+        void UnSubscriptionOnChange(Action<string> unsubscriptionAction);
     }
 }

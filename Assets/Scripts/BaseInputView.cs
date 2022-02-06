@@ -21,19 +21,31 @@ public abstract class BaseInputView : MonoBehaviour
     }
     
     protected void OnLeftMove(float value)
-    {        
+    {
+        if (FuelCheck()) return;
+
         _leftMove.Value = value;
         FuelChange(value);
     }
 
     protected void OnRightMove(float value)
     {
+        if (FuelCheck()) return;
+
         _rightMove.Value = value;
         FuelChange(value);
     }
 
+    protected bool FuelCheck()
+    {
+        return (_fuelController.FuelCount <= 0);           
+    }
+
     protected void FuelChange(float step)
     {
+        if (step != 0)
+            _fuelController.RotateGarWheels(-step * Time.deltaTime);
+
         _stepCount += step;
 
         if (Mathf.Abs(_stepCount) > _fuelConsumptionInterval)
