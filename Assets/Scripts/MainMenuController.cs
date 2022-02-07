@@ -24,15 +24,7 @@ public class MainMenuController : BaseController
         _view = LoadView(placeForUi);
         _view.Init(StartGame, profilePlayer.CurrentCar.Fuel);
 
-
-        var products = new List<ShopProduct>()
-        {
-            new ShopProduct("com.c1.racing.fuel", UnityEngine.Purchasing.ProductType.NonConsumable, 100, TypeOfProduct.Fuel),
-            new ShopProduct("com.c1.racing.goldPack", UnityEngine.Purchasing.ProductType.NonConsumable, 50, TypeOfProduct.Gold),
-        };
-
-        _shopTools = new ShopTools(products);
-        _shopController = new ShopController(_profilePlayer, _shopTools, _view, products);
+        InitShop();
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -48,6 +40,19 @@ public class MainMenuController : BaseController
         _analytics.SendMessage("Start", new Dictionary<string, object>());
         _ads.ShowInterstitial();
         _profilePlayer.CurrentState.Value = GameState.Game;
+    }
+
+    private void InitShop()
+    {
+        var products = new List<ShopProduct>()  //todo вынести заполнение списка товаров в сериализуемый класс в ScriptableObject
+        {
+            new ShopProduct("com.c1.racing.fuel", UnityEngine.Purchasing.ProductType.NonConsumable, 100, TypeOfProduct.Fuel),
+            new ShopProduct("com.c1.racing.goldPack", UnityEngine.Purchasing.ProductType.NonConsumable, 50, TypeOfProduct.Gold),
+        };
+
+        _shopTools = new ShopTools(products);
+        _shopController = new ShopController(_profilePlayer, _shopTools, _view, products);
+        AddController(_shopController);
     }
 }
 
