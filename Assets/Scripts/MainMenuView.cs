@@ -8,7 +8,7 @@ public class MainMenuView : MonoBehaviour, IView
 {
     [SerializeField] private Button _buttonStart;
 
-    public void Init(UnityAction startGame)
+    public void Init(UnityAction startGame) 
     {
         _buttonStart.onClick.AddListener(startGame);
     }

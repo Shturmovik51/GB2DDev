@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 
 public class MainMenuController : BaseController
 {
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/mainMenu"};
+    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/MainMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly MainMenuView _view;
 
@@ -14,21 +14,20 @@ public class MainMenuController : BaseController
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
         AddGameObjects(_view.gameObject);
-        _view.Init(StartGame);
+        _view.Init(StartGaRage);
     }
-    
+
     private MainMenuView LoadView(Transform placeForUi)
     {
         return ResourceLoader.LoadAndInstantiateView<MainMenuView>(_viewPath, placeForUi);
     }
 
-    private void StartGame()
+    private void StartGaRage()
     {
-        _profilePlayer.CurrentState.Value = GameState.Game;
+        _profilePlayer.CurrentState.Value = GameState.Garage;
 
         _profilePlayer.AnalyticTools.SendMessage("start_game",
-            new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup }
-    });
-}
+            new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup } });
+    }
 }
 

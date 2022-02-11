@@ -2,10 +2,12 @@
 using Features.AbilitiesFeature;
 using Tools;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel, Transform uiRoot)
+    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel,
+                            Transform uiRoot, GarageMenuController garageMenuController)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -27,6 +29,12 @@ public class GameController : BaseController
             abilityView);
         AddController(abilitiesController);
 
+        var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/PauseButton"), uiRoot);
+        var pauseButton = pauseButtonObj.GetComponent<Button>();
+
+        pauseButton.onClick.AddListener(garageMenuController.ChangeGarageViewActiveState);
+
+        AddGameObjects(pauseButtonObj);
     }
 }
 

@@ -27,6 +27,7 @@ public class MainController : BaseController
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
+    private GarageMenuController _garageMenuController;
     private InventoryController _inventoryController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -54,12 +55,26 @@ public class MainController : BaseController
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
+            case GameState.Garage:
+                _garageMenuController = new GarageMenuController(_placeForUi, _profilePlayer);
+
+                _mainMenuController?.Dispose();
+                break;
+
             case GameState.Game:
+
+                if (_gameController != null)
+                {
+                    _garageMenuController?.ChangeGarageViewActiveState();
+                    return;
+                }
+
                 var inventoryModel = new InventoryModel();
                 _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                 _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);
-                _mainMenuController?.Dispose();
+                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi, _garageMenuController);
+                _garageMenuController?.ChangeGarageViewActiveState();
+
                 break;
             default:
                 AllClear();
