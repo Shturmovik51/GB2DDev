@@ -22,4 +22,9 @@ public class InventoryController : BaseController, IInventoryController
         var equippedItems = _inventoryModel.GetEquippedItems();
         _inventoryView.Display(equippedItems);
     }
+
+    public IRepository<int, IItem> GetItemRepository()
+    {
+        return _itemsRepository;
+    }
 }

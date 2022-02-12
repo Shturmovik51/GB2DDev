@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Profile;
 using UnityEngine;
 
 public class ShedController : BaseController, IShedController
@@ -7,18 +8,34 @@ public class ShedController : BaseController, IShedController
     private readonly Car _car;
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
-    private readonly InventoryModel _model;
+    private readonly InventoryModel _inventoryModel;
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car)
+    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/GarageMenu" };
+    private readonly ProfilePlayer _profilePlayer;
+    private readonly ShedView _view;
+    private bool _isFirstStart = true;
+
+
+
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, ProfilePlayer profilePlayer,
+                            InventoryModel inventoryModel, InventoryController inventoryController, Transform placeForUi)
     {
         _upgradeItems = upgradeItems;
-        _car = car;
-        _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
+        _car = profilePlayer.CurrentCar;
 
-        _model = new InventoryModel();
+        _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
         AddController(_upgradeRepository);
-        _inventoryController = new InventoryController(items, _model);
-        AddController(_inventoryController);
+
+        
+        _inventoryController = inventoryController;
+        _inventoryModel = inventoryModel;
+
+         _profilePlayer = profilePlayer;
+        _view = LoadView(placeForUi);
+        //AddGameObjects(_view.gameObject);
+        _view.Init(StartGame);
+
+
     }
 
     public void Enter()
@@ -29,7 +46,7 @@ public class ShedController : BaseController, IShedController
 
     public void Exit()
     {
-        UpgradeCarWithEquipedItems(_car, _model.GetEquippedItems(), _upgradeRepository.Content);
+        UpgradeCarWithEquipedItems(_car, _inventoryModel.GetEquippedItems(), _upgradeRepository.Content);
         Debug.Log($"Exit, car speed = {_car.Speed}");
     }
 
@@ -42,5 +59,33 @@ public class ShedController : BaseController, IShedController
             if (upgradeHandlers.TryGetValue(item.Id, out var handler))
                 handler.Upgrade(car);
         }
+    }
+
+
+
+
+
+    private ShedView LoadView(Transform placeForUi)
+    {
+        return ResourceLoader.LoadAndInstantiateView<ShedView>(_viewPath, placeForUi);
+    }
+
+    private void StartGame()
+    {
+        if (_isFirstStart)
+        {
+            _view.SetButtonTextAsContinue();
+            _isFirstStart = false;
+        }
+
+        _profilePlayer.CurrentState.Value = GameState.Game;
+
+        _profilePlayer.AnalyticTools.SendMessage("start_game",
+            new Dictionary<string, object>() { { "time", Time.realtimeSinceStartup } });
+    }
+
+    public void ChangeShedViewActiveState()
+    {
+        _view.gameObject.SetActive(_view.gameObject.activeInHierarchy ? false : true);
     }
 }

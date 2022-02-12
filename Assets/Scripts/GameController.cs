@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameController : BaseController
 {
     public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel,
-                            Transform uiRoot, GarageMenuController garageMenuController)
+                            Transform uiRoot, ShedController shedController)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -32,7 +32,7 @@ public class GameController : BaseController
         var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/PauseButton"), uiRoot);
         var pauseButton = pauseButtonObj.GetComponent<Button>();
 
-        pauseButton.onClick.AddListener(garageMenuController.ChangeGarageViewActiveState);
+        pauseButton.onClick.AddListener(shedController.ChangeShedViewActiveState);
 
         AddGameObjects(pauseButtonObj);
     }

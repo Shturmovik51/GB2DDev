@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class MainController : BaseController
 {
+    private MainMenuController _mainMenuController;
+    private ShedController _shedController;
+    private GameController _gameController;
+    private InventoryController _inventoryController;
+    private readonly Transform _placeForUi;
+    private readonly ProfilePlayer _profilePlayer;
+    private readonly List<ItemConfig> _itemsConfig;
+    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
+    private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
+
+
+    private InventoryModel _inventoryModel;
+
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         IReadOnlyList<AbilityItemConfig> abilityItems)
@@ -24,17 +37,6 @@ public class MainController : BaseController
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
-    private MainMenuController _mainMenuController;
-    private ShedController _shedController;
-    private GameController _gameController;
-    private GarageMenuController _garageMenuController;
-    private InventoryController _inventoryController;
-    private readonly Transform _placeForUi;
-    private readonly ProfilePlayer _profilePlayer;
-    private readonly List<ItemConfig> _itemsConfig;
-    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
-    private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
-
     protected override void OnDispose()
     {
         AllClear();
@@ -49,14 +51,18 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar);
-                _shedController.Enter();
-                _shedController.Exit();
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
+
             case GameState.Garage:
-                _garageMenuController = new GarageMenuController(_placeForUi, _profilePlayer);
+                _inventoryModel = new InventoryModel();
+                _inventoryController = new InventoryController(_itemsConfig, _inventoryModel);
+                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer, _inventoryModel, _inventoryController, _placeForUi);
+                _shedController.Enter();
+                //_inventoryController.ShowInventory();
+
+
 
                 _mainMenuController?.Dispose();
                 break;
@@ -65,15 +71,14 @@ public class MainController : BaseController
 
                 if (_gameController != null)
                 {
-                    _garageMenuController?.ChangeGarageViewActiveState();
+                    _shedController.Exit();
+                    _shedController?.ChangeShedViewActiveState();
                     return;
                 }
 
-                var inventoryModel = new InventoryModel();
-                _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
-                _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi, _garageMenuController);
-                _garageMenuController?.ChangeGarageViewActiveState();
+                _shedController.Exit();
+                _gameController = new GameController(_profilePlayer, _abilityItems, _inventoryModel, _placeForUi, _shedController);
+                _shedController?.ChangeShedViewActiveState();
 
                 break;
             default:

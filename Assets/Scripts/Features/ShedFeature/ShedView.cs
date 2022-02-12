@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class GarageMenuView : MonoBehaviour, IView
+public class ShedView : MonoBehaviour, IView
 {
     [SerializeField] private Button _buttonStartGame;
     [SerializeField] private TextMeshProUGUI _buttonStartGameTMPro;
-    [SerializeField] string _startGameButtonText;
-    [SerializeField] string _continueGameButtonText;
+    [SerializeField] private string _startGameButtonText;
+    [SerializeField] private string _continueGameButtonText;
+    [SerializeField] private Transform _placeForShedInventory;
 
     public void Init(UnityAction startGame)
     {
