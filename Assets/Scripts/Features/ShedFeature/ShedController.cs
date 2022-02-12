@@ -9,14 +9,10 @@ public class ShedController : BaseController, IShedController
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _inventoryModel;
-
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/GarageMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly ShedView _view;
     private bool _isFirstStart = true;
-
-
-
     public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, ProfilePlayer profilePlayer,
                             InventoryModel inventoryModel, InventoryController inventoryController, Transform placeForUi)
     {
@@ -48,20 +44,31 @@ public class ShedController : BaseController, IShedController
         Debug.Log($"Exit, car speed = {_car.Speed}");
     }
 
-    private void UpgradeCarWithEquipedItems(IUpgradeableCar car,
-        IReadOnlyList<UpgradeItem> equiped,
-        IReadOnlyDictionary<int, IUpgradeCarHandler> upgradeHandlers)
+    private void UpgradeCarWithEquipedItems(IUpgradeableCar car, IReadOnlyList<UpgradeItem> equiped, 
+                                                IReadOnlyDictionary<int, IUpgradeCarHandler> upgradeHandlers)
     {
         foreach (var item in equiped)
         {
-            if (upgradeHandlers.TryGetValue(item.ItemID, out var handler) && item.IsActive)
-                handler.Upgrade(car);
+            if (item.IsActive && item.IsEquipped)
+                continue;
+
+            if (upgradeHandlers.TryGetValue(item.ItemID, out var handler))
+            {                
+                if (item.IsActive && !item.IsEquipped)
+                {
+                    handler.Upgrade(car);
+                    item.ChangeItemEquippedStatus(true);
+                }
+                if(!item.IsActive && item.IsEquipped)
+                {
+                    handler.Degrade(car);
+                    item.ChangeItemEquippedStatus(false);
+                }                
+            }
+
+           // Debug.Log($"{item.ItemID}, {item.IsActive}, {item.IsEquipped}");
         }
     }
-
-
-
-
 
     private ShedView LoadView(Transform placeForUi)
     {

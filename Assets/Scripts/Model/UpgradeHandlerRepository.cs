@@ -31,7 +31,7 @@ public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgrad
             case UpgradeType.Speed:
                 return new SpeedUpgradeHandler(config);
                 break;
-            case UpgradeType.Control:
+            case UpgradeType.Axeleration:
                 return UpgradeHandelrStub.Default;
                 break;
             default:

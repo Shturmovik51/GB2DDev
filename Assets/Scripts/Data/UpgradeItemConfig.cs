@@ -16,7 +16,7 @@ public class UpgradeItemConfig : ScriptableObject
 
 public enum UpgradeType
 {
-    None,
-    Speed,
-    Control
+    None = 0,
+    Speed = 1,
+    Axeleration = 2,
 }

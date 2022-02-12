@@ -12,4 +12,9 @@
         car.Speed += _config.ValueUpgrade;
         return car;
     }
+    public IUpgradeableCar Degrade(IUpgradeableCar car)
+    {
+        car.Speed -= _config.ValueUpgrade;
+        return car;
+    }
 }
