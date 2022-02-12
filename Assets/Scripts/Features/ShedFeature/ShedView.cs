@@ -13,6 +13,8 @@ public class ShedView : MonoBehaviour, IView
     [SerializeField] private string _continueGameButtonText;
     [SerializeField] private Transform _placeForShedInventory;
 
+    public Transform PlaceForShedInventory => _placeForShedInventory;
+
     public void Init(UnityAction startGame)
     {
         _buttonStartGame.onClick.AddListener(startGame);

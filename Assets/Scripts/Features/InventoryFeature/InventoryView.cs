@@ -3,10 +3,22 @@ using UnityEngine;
 
 public class InventoryView : IInventoryView
 {
-    public void Display(IReadOnlyList<IItem> items)
+    private Transform _cellPlace;
+    private GameObject _upgradeItemPref;
+
+    public InventoryView()
+    {
+        _upgradeItemPref = (GameObject)Resources.Load("Prefabs/UpgradeItemView");
+    }
+
+    public void Display(IReadOnlyList<UpgradeItem> items)
     {
         foreach(var item in items)
-            Debug.Log($"Id item: {item.Id}. Title item: {item.Info.Title}");
+        {
+            var cell = Object.Instantiate(_upgradeItemPref, _cellPlace);
+            var view = cell.GetComponent<UpgradeItemView>();
+            view.Init(item);
+        }            
     }
 
     public void Show()
@@ -17,5 +29,10 @@ public class InventoryView : IInventoryView
     public void Hide()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Init(Transform cellPlace)
+    {
+        _cellPlace = cellPlace;
     }
 }

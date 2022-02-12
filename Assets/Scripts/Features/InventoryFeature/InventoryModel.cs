@@ -2,14 +2,14 @@
 
 public class InventoryModel : IInventoryModel
 {
-    private readonly List<IItem> _items = new List<IItem>();
+    private readonly List<UpgradeItem> _items = new List<UpgradeItem>();
 
-    public IReadOnlyList<IItem> GetEquippedItems()
+    public IReadOnlyList<UpgradeItem> GetEquippedItems()
     {
         return _items;
     }
 
-    public void EquipItem(IItem item)
+    public void EquipItem(UpgradeItem item)
     {
         if (_items.Contains(item))
             return;
@@ -17,7 +17,7 @@ public class InventoryModel : IInventoryModel
         _items.Add(item);
     }
 
-    public void UnEquipItem(IItem item)
+    public void UnEquipItem(UpgradeItem item)
     {
         _items.Remove(item);
     }

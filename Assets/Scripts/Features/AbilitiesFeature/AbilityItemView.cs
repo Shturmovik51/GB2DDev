@@ -6,8 +6,7 @@ namespace Features.AbilitiesFeature
 {
     public class AbilityItemView:MonoBehaviour
     {
-        [SerializeField]
-        private Button _button;
+        [SerializeField] private Button _button;
 
         public event Action<IItem> OnClick;
 

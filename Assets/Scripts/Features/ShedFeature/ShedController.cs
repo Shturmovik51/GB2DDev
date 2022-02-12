@@ -26,16 +26,14 @@ public class ShedController : BaseController, IShedController
         _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
         AddController(_upgradeRepository);
 
+        _view = LoadView(placeForUi);      
+        _view.Init(StartGame);
         
         _inventoryController = inventoryController;
+        _inventoryController.InitInventoryView(_view.PlaceForShedInventory);
         _inventoryModel = inventoryModel;
 
          _profilePlayer = profilePlayer;
-        _view = LoadView(placeForUi);
-        //AddGameObjects(_view.gameObject);
-        _view.Init(StartGame);
-
-
     }
 
     public void Enter()
@@ -51,12 +49,12 @@ public class ShedController : BaseController, IShedController
     }
 
     private void UpgradeCarWithEquipedItems(IUpgradeableCar car,
-        IReadOnlyList<IItem> equiped,
+        IReadOnlyList<UpgradeItem> equiped,
         IReadOnlyDictionary<int, IUpgradeCarHandler> upgradeHandlers)
     {
         foreach (var item in equiped)
         {
-            if (upgradeHandlers.TryGetValue(item.Id, out var handler))
+            if (upgradeHandlers.TryGetValue(item.ItemID, out var handler) && item.IsActive)
                 handler.Upgrade(car);
         }
     }

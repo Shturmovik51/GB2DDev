@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Tools;
 
-public class ItemsRepository : BaseController, IRepository<int, IItem>
+public class ItemsRepository : BaseController, IRepository<int, UpgradeItem>
 {
-    public IReadOnlyDictionary<int, IItem> Content => _itemsMapById;
+    public IReadOnlyDictionary<int, UpgradeItem> Content => _itemsMapById;
 
-    private Dictionary<int, IItem> _itemsMapById = new Dictionary<int, IItem>();
+    private Dictionary<int, UpgradeItem> _itemsMapById = new Dictionary<int, UpgradeItem>();
 
-    public ItemsRepository(List<ItemConfig> itemConfigs)
+    public ItemsRepository(IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
     {
-        PopulateItems(itemConfigs);
+        PopulateItems(upgradeItemConfigs);
     }
 
     protected override void OnDispose()
@@ -17,9 +17,9 @@ public class ItemsRepository : BaseController, IRepository<int, IItem>
         _itemsMapById.Clear();
     }
 
-    private void PopulateItems(List<ItemConfig> configs)
+    private void PopulateItems(IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
     {
-        foreach (var config in configs)
+        foreach (var config in upgradeItemConfigs)
         {
             if (_itemsMapById.ContainsKey(config.Id))
                 continue;
@@ -28,13 +28,14 @@ public class ItemsRepository : BaseController, IRepository<int, IItem>
         }
     }
 
-    private IItem CreateItem(ItemConfig itemConfig)
+    private UpgradeItem CreateItem(UpgradeItemConfig itemConfig)
     {
-        return new Item 
-        { 
-            Id = itemConfig.Id, 
-            Info = new ItemInfo { Title = itemConfig.Title } 
-        };
+        return new UpgradeItem(itemConfig.Id, itemConfig.UpgradeType, itemConfig.ValueUpgrade, itemConfig.ImageSprite);        
+    }
+
+    public Dictionary<int, UpgradeItem> GetItemsMapBbyId()
+    {
+        return _itemsMapById;
     }
 }
 

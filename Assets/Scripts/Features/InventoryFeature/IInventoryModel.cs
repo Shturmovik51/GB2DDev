@@ -2,7 +2,7 @@
 
 public interface IInventoryModel
 {
-    IReadOnlyList<IItem> GetEquippedItems();
-    void EquipItem(IItem item);
-    void UnEquipItem(IItem item);
+    IReadOnlyList<UpgradeItem> GetEquippedItems();
+    void EquipItem(UpgradeItem item);
+    void UnEquipItem(UpgradeItem item);
 }

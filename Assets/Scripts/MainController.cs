@@ -57,7 +57,7 @@ public class MainController : BaseController
 
             case GameState.Garage:
                 _inventoryModel = new InventoryModel();
-                _inventoryController = new InventoryController(_itemsConfig, _inventoryModel);
+                _inventoryController = new InventoryController(_upgradeItems, _inventoryModel);
                 _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer, _inventoryModel, _inventoryController, _placeForUi);
                 _shedController.Enter();
                 //_inventoryController.ShowInventory();

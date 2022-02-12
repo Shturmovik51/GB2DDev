@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using UI;
+using UnityEngine;
 
 public interface IInventoryView:IView
 {
-    void Display(IReadOnlyList<IItem> items);
+    void Display(IReadOnlyList<UpgradeItem> items);
+    void Init(Transform cellPlace);
 }

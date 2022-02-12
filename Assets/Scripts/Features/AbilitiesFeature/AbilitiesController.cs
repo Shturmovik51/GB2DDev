@@ -21,7 +21,7 @@ public class AbilitiesController : BaseController
         _abilityCollectionView =
             abilityCollectionView ?? throw new ArgumentNullException(nameof(abilityCollectionView));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
-        _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+        //_abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
     }
 
     private void OnAbilityUseRequested(object sender, IItem e)
