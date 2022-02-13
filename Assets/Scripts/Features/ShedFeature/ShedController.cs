@@ -65,8 +65,6 @@ public class ShedController : BaseController, IShedController
                     item.ChangeItemEquippedStatus(false);
                 }                
             }
-
-           // Debug.Log($"{item.ItemID}, {item.IsActive}, {item.IsEquipped}");
         }
     }
 

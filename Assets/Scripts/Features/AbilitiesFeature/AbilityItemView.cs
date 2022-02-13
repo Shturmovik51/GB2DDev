@@ -7,14 +7,16 @@ namespace Features.AbilitiesFeature
     public class AbilityItemView:MonoBehaviour
     {
         [SerializeField] private Button _button;
+        [SerializeField] private Image _image;
 
-        public event Action<IItem> OnClick;
+        public event Action<AbilityItem> OnClick;
 
-        private IItem _item;
+        private AbilityItem _item;
 
-        public void Init(IItem item)
+        public void Init(AbilityItem item)
         {
             _item = item;
+            _image.sprite = item.ImageSprite;
         }
 
         private void Awake()

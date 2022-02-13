@@ -1,4 +1,6 @@
-﻿public class Car: IUpgradeableCar
+﻿using UnityEngine;
+
+public class Car : IUpgradeableCar
 {
     public float Speed { get; set; }
     public float Axeleration { get; set; }

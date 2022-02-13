@@ -1,4 +1,6 @@
-﻿public interface IAbility
+﻿using Features.AbilitiesFeature;
+
+public interface IAbility
 {
-    void Apply(IAbilityActivator activator);
+    void Apply(IAbilityActivator activator, AbilitiesView sender);
 }

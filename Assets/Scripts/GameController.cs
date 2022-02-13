@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel,
+    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItem> configs, InventoryModel inventoryModel,
                             Transform uiRoot, ShedController shedController)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();

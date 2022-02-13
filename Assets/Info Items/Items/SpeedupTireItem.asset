@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1e3240f3e02b9846a3534e986860192, type: 3}
-  m_Name: Tire
+  m_Name: SpeedupTireItem
   m_EditorClassIdentifier: 
   _id: 1
   _title: Tire

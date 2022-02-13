@@ -7,6 +7,8 @@ namespace Features.AbilitiesFeature
     [RequireComponent(typeof(CanvasGroup))]
     public class AbilitiesView : MonoBehaviour, IAbilityCollectionView
     {
+        public event EventHandler<AbilityItem> UseRequested;
+
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Transform _layout;
         [SerializeField] private AbilityItemView _viewPrefab;
@@ -23,9 +25,8 @@ namespace Features.AbilitiesFeature
             _canvasGroup.alpha = 0;
         }
 
-        public event EventHandler<IItem> UseRequested;
 
-        public void Display(IReadOnlyList<IItem> abilityItems)
+        public void Display(IReadOnlyList<AbilityItem> abilityItems)
         {
             foreach (var ability in abilityItems)
             {
@@ -35,7 +36,7 @@ namespace Features.AbilitiesFeature
             }
         }
 
-        private void OnRequested(IItem obj)
+        private void OnRequested(AbilityItem obj)
         {
             UseRequested?.Invoke(this, obj);
         }

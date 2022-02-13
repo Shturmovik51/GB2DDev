@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 7895036672659949842}
   - component: {fileID: 585675565305240093}
   m_Layer: 5
-  m_Name: AbilityItem
+  m_Name: AbilityItemView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,3 +247,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 7708717947706630}
+  _image: {fileID: 6544610897982267162}
