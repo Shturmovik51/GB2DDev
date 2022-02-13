@@ -522,6 +522,9 @@ MonoBehaviour:
   _upgradeSource: {fileID: 11400000, guid: 4b0ac3781b2cd5f40bb67ec9c9e1cd6b, type: 2}
   _abilityItems:
   - {fileID: 11400000, guid: 09a823ea2315b9a4dbdad15bed5f3fed, type: 2}
+  - {fileID: 11400000, guid: 3bba31261444d0341a1c528ca06f75d3, type: 2}
+  - {fileID: 11400000, guid: fe39ac7aae08a18489bb654ac20a0422, type: 2}
+  - {fileID: 11400000, guid: 95da334ca26e3d349b8fdafa29e41658, type: 2}
 --- !u!114 &1980575211
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SmokeAbility
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 186a4d2bdc1279046bb41d46e32eb502, type: 2}
-  View: {fileID: 0}
+  View: {fileID: 4862410644110794846, guid: c1d2d9d15ac0e5c49bae46e99e990407, type: 3}
   Type: 4
   Sprite: {fileID: 21300000, guid: a3dde001bc3076e4ca0998fe4d32ade3, type: 3}
   Value: 0
-  Duration: 0
+  Duration: 5
