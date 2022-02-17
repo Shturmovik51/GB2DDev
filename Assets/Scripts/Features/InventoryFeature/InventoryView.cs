@@ -14,13 +14,18 @@ public class InventoryView : IInventoryView
         _refreshInventory = refreshInventory;
     }
 
-    public void Display(IReadOnlyList<UpgradeItem> items)
+    public void Display(IReadOnlyList<IItem> items)
     {
-        foreach(var item in items)
-        {
-            var cell = UnityEngine.Object.Instantiate(_upgradeItemPref, _cellPlace);
-            var view = cell.GetComponent<UpgradeItemView>();
-            view.Init(item, _refreshInventory);
+        foreach (var item in items)
+        {            
+            var itemProperty = item.GetItemProperty<UpgradeItem>();
+
+            if(itemProperty != null)
+            {
+                var cell = UnityEngine.Object.Instantiate(_upgradeItemPref, _cellPlace);
+                var view = cell.GetComponent<UpgradeItemView>();
+                view.Init(itemProperty, _refreshInventory);
+            }
         }            
     }
 

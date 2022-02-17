@@ -1,5 +1,5 @@
 ﻿public interface IItem
 {
-    int Id { get; set; }
-    ItemInfo Info { get; set; }
+    int ItemID { get; }
+    T GetItemProperty<T>() where T : class;    
 }

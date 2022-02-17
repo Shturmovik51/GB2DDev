@@ -17,7 +17,7 @@ public class UpgradeItem
         UpgradeType = upgradeType;
         ValueUpgrade = valueUpgrade;
         ImageSprite = imageSprite;
-    }
+    }    
 
     public void SetToggle(Toggle toggle)
     {

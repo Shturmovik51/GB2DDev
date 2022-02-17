@@ -4,7 +4,7 @@ using Tools;
 
 public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgradeCarHandler>
 {
-    public IReadOnlyDictionary<int, IUpgradeCarHandler> Content => _content;
+    public IReadOnlyDictionary<int, IUpgradeCarHandler> ItemsMapBuID => _content;
 
     private Dictionary<int, IUpgradeCarHandler> _content = new Dictionary<int, IUpgradeCarHandler>();
 
@@ -31,7 +31,7 @@ public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgrad
             case UpgradeType.Speed:
                 return new SpeedUpgradeHandler(config);
                 break;
-            case UpgradeType.Axeleration:
+            case UpgradeType.Acceleration:
                 return UpgradeHandelrStub.Default;
                 break;
             default:

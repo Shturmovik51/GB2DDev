@@ -1,47 +1,30 @@
 ﻿using System.Collections.Generic;
 
-public class InventoryModel : IInventoryModel, IAbilityInventoryModel
+public class InventoryModel : IInventoryModel//, IAbilityInventoryModel
 {
-    private readonly List<UpgradeItem> _items = new List<UpgradeItem>();
-    private readonly List<AbilityItem> _abilities = new List<AbilityItem>();
+    private readonly List<IItem> _quippedItems = new List<IItem>();
 
-    public IReadOnlyList<UpgradeItem> GetEquippedItems()
+    public IReadOnlyList<IItem> GetEquippedItems()
     {
-        return _items;
+        return _quippedItems;
     }
-    public IReadOnlyList<AbilityItem> GetAbilities()
+
+    public void EquipItem(IItem item)
     {
-        return _abilities;
-    }
-    public void EquipItem(UpgradeItem item)
-    {
-        if (_items.Contains(item))
+        if (_quippedItems.Contains(item))
             return;
 
-        _items.Add(item);
+        _quippedItems.Add(item);
     }
-    public void UnEquipItem(UpgradeItem item)
+    public void UnEquipItem(IItem item)
     {
-        _items.Remove(item);
-    }
-
-    public void EquipAbility(AbilityItem ability)
-    {
-        if (_abilities.Contains(ability))
-            return;
-
-        _abilities.Add(ability);
-    }
-
-    public void UnEquipAbility(AbilityItem ability)
-    {
-        _abilities.Remove(ability);
+        _quippedItems.Remove(item);
     }
 }
 
-public interface IAbilityInventoryModel
-{
-     IReadOnlyList<AbilityItem> GetAbilities();
-    void EquipAbility(AbilityItem ability);
-    void UnEquipAbility(AbilityItem ability);
-}
+//public interface IAbilityInventoryModel
+//{
+//     IReadOnlyList<AbilityItem> GetAbilities();
+//    void EquipAbility(AbilityItem ability);
+//    void UnEquipAbility(AbilityItem ability);
+//}

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItem> configs, InventoryModel inventoryModel,
+    public GameController(ProfilePlayer profilePlayer, InventoryModel inventoryModel,
                             Transform uiRoot, ShedController shedController)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
@@ -21,12 +21,11 @@ public class GameController : BaseController
         var carController = new CarController();
         AddController(carController);
 
-        var abilityRepository = new AbilityRepository(configs);
+        var abilityRepository = new AbilityRepository(inventoryModel.GetEquippedItems());
         var abilityView =
             ResourceLoader.LoadAndInstantiateView<AbilitiesView>(
                 new ResourcePath() { PathResource = "Prefabs/AbilitiesView" }, uiRoot);
-        var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,
-            abilityView);
+        var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository, abilityView);
         AddController(abilitiesController);
 
         var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/PauseButton"), uiRoot);

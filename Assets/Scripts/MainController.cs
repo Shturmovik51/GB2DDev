@@ -11,10 +11,9 @@ public class MainController : BaseController
     private InventoryController _inventoryController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
-    private readonly List<ItemConfig> _itemsConfig;
-    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
-    private readonly List<AbilityItem> _abilityItems;
-
+    //private readonly List<IItem> _itemsConfig = new List<IItem>();
+    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
+    private readonly IReadOnlyList<AbilityItemConfig> _abilityItemConfigs;
 
     private InventoryModel _inventoryModel;
 
@@ -22,22 +21,17 @@ public class MainController : BaseController
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         IReadOnlyList<AbilityItemConfig> abilityItems)
     {
-        _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
+        _profilePlayer = profilePlayer;
+        _upgradeItemConfigs = upgradeItems;
+        _abilityItemConfigs = abilityItems;
 
-        _upgradeItems = upgradeItems;
-                
-        _abilityItems = new List<AbilityItem>();
-        foreach (var item in abilityItems)
-        {
-            var ability = new AbilityItem(item.Item.Id, item.View, item.Type, item.Sprite, item.Value, item.Duration);
-            _abilityItems.Add(ability);
-        }
-
-        //var itemsSource =
-        //    ResourceLoader.LoadDataSource<ItemConfig>(new ResourcePath()
-        //        { PathResource = "Data/ItemsSource" });
-        //_itemsConfig = itemsSource.Content.ToList();
+        //_abilityItems = new List<AbilityItem>();
+        //foreach (var item in abilityItems)
+        //{
+        //    var ability = new AbilityItem(item.Item.Id, item.View, item.Type, item.Sprite, item.Value, item.Duration);
+        //    _abilityItems.Add(ability);
+        //}        
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -63,11 +57,10 @@ public class MainController : BaseController
 
             case GameState.Garage:
                 _inventoryModel = new InventoryModel();
-                _inventoryController = new InventoryController(_upgradeItems, _inventoryModel);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer, _inventoryModel, 
+                _inventoryController = new InventoryController(_upgradeItemConfigs, _abilityItemConfigs, _inventoryModel);
+                _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer, _inventoryModel, 
                                                         _inventoryController, _placeForUi);
                 _shedController.Enter();
-                //_inventoryController.ShowInventory();
                 _mainMenuController?.Dispose();
                 break;
 
@@ -80,13 +73,14 @@ public class MainController : BaseController
                     return;
                 }
 
-
-                foreach (var ability in _abilityItems)
+                foreach (var item in _inventoryController.ItemsRepository.ItemsMapBuID)
                 {
-                    _inventoryModel.EquipAbility(ability);
+                    if(item.Value is AbilityItem)
+                        _inventoryModel.EquipItem(item.Value);
                 }
+
                 _shedController.Exit();
-                _gameController = new GameController(_profilePlayer, _abilityItems.AsReadOnly(), _inventoryModel, _placeForUi, _shedController);
+                _gameController = new GameController(_profilePlayer, _inventoryModel, _placeForUi, _shedController);
                 _shedController?.ChangeShedViewActiveState();
 
                 break;

@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class AbilityRepository : BaseController, IRepository<int, IAbility>
 {
-    public IReadOnlyDictionary<int, IAbility> Content { get => _abilitiesMap; }
+    public IReadOnlyDictionary<int, IAbility> ItemsMapBuID { get => _abilitiesMap; }
 
     private Dictionary<int, IAbility> _abilitiesMap = new Dictionary<int, IAbility>();
 
-    public AbilityRepository(IReadOnlyList<AbilityItem> abilities)
+    public AbilityRepository(IReadOnlyList<IItem> items)
     {
-        foreach (var ability in abilities)
+        foreach (var item in items)
         {
-            _abilitiesMap[ability.ItemID] = CreateAbility(ability);
+            var abilityItem = item.GetItemProperty<AbilityItem>();
+            if(abilityItem != null)
+                _abilitiesMap[item.ItemID] = CreateAbility(abilityItem);
         }
     }
 

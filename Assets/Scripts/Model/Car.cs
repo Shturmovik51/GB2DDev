@@ -3,10 +3,10 @@
 public class Car : IUpgradeableCar
 {
     public float Speed { get; set; }
-    public float Axeleration { get; set; }
+    public float Acceleration { get; set; }
 
     private float _defaultSpeed;
-    private float _defaultAxeleration = 0;
+    private float _defaultAcceleration = 0;
 
     public Car(float speed)
     {
@@ -19,9 +19,9 @@ public class Car : IUpgradeableCar
         Speed = _defaultSpeed;
     }
 
-    public void RestoreAxeleration()
+    public void RestoreAcceleration()
     {
-        Axeleration = _defaultAxeleration;
+        Acceleration = _defaultAcceleration;
     }
 
 }

@@ -13,8 +13,6 @@ namespace Features.AbilitiesFeature
         [SerializeField] private Transform _layout;
         [SerializeField] private AbilityItemView _viewPrefab;
 
-        private List<AbilityItemView> _currentViews = new List<AbilityItemView>();
-
         public void Show()
         {
             _canvasGroup.alpha = 1;
@@ -25,14 +23,17 @@ namespace Features.AbilitiesFeature
             _canvasGroup.alpha = 0;
         }
 
-
-        public void Display(IReadOnlyList<AbilityItem> abilityItems)
+        public void Display(IReadOnlyList<IItem> items)
         {
-            foreach (var ability in abilityItems)
+            foreach (var item in items)
             {
-                var view = Instantiate<AbilityItemView>(_viewPrefab, _layout);
-                view.Init(ability);
-                view.OnClick += OnRequested;
+                var abilityProperty = item.GetItemProperty<AbilityItem>();
+                if(abilityProperty != null)
+                {
+                    var view = Instantiate<AbilityItemView>(_viewPrefab, _layout);
+                    view.Init(abilityProperty);
+                    view.OnClick += OnRequested;
+                }
             }
         }
 

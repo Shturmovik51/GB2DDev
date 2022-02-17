@@ -4,6 +4,6 @@ namespace Tools
 {
     public interface IRepository<Tkey, TValue>
     {
-        IReadOnlyDictionary<Tkey, TValue> Content { get; }
+        IReadOnlyDictionary<Tkey, TValue> ItemsMapBuID { get; }
     }
 }

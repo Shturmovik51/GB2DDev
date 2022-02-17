@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IInventoryView:IView
 {
-    void Display(IReadOnlyList<UpgradeItem> items);
+    void Display(IReadOnlyList<IItem> items);
     void Init(Transform cellPlace);
 }

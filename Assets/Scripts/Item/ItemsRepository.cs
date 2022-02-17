@@ -1,15 +1,31 @@
 ﻿using System.Collections.Generic;
 using Tools;
 
-public class ItemsRepository : BaseController, IRepository<int, UpgradeItem>
+public class ItemsRepository : BaseController, IRepository<int, IItem>
 {
-    public IReadOnlyDictionary<int, UpgradeItem> Content => _itemsMapById;
+    private readonly List<IItem> _itemsConfig = new List<IItem>();
+    private Dictionary<int, IItem> _itemsMapById = new Dictionary<int, IItem>();
 
-    private Dictionary<int, UpgradeItem> _itemsMapById = new Dictionary<int, UpgradeItem>();
+    public IReadOnlyDictionary<int, IItem> ItemsMapBuID => _itemsMapById;
 
-    public ItemsRepository(IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
+    public ItemsRepository(IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs, IReadOnlyList<AbilityItemConfig> abilityItemConfigs)
     {
-        PopulateItems(upgradeItemConfigs);
+        foreach (var itemConfig in upgradeItemConfigs)
+        {
+            var itemProperty = CreateUpgradeItem(itemConfig);
+            var newItem = new Item<UpgradeItem>(itemProperty, itemConfig.Id);
+
+            _itemsConfig.Add(newItem);
+        }
+
+        foreach (var itemConfig in abilityItemConfigs)
+        {
+            var itemProperty = CreateAbilityItem(itemConfig);
+            var newItem = new Item<AbilityItem>(itemProperty, itemConfig.Item.Id);
+            _itemsConfig.Add(newItem);
+        }
+
+        PopulateItems(_itemsConfig);
     }
 
     protected override void OnDispose()
@@ -17,26 +33,25 @@ public class ItemsRepository : BaseController, IRepository<int, UpgradeItem>
         _itemsMapById.Clear();
     }
 
-    private void PopulateItems(IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
+    private void PopulateItems(List<IItem> itemsCollection)
     {
-        foreach (var config in upgradeItemConfigs)
+        foreach (var item in itemsCollection)
         {
-            if (_itemsMapById.ContainsKey(config.Id))
+            if (_itemsMapById.ContainsKey(item.ItemID))
                 continue;
 
-            _itemsMapById.Add(config.Id, CreateItem(config));
+            _itemsMapById.Add(item.ItemID, item);
         }
     }
 
-    private UpgradeItem CreateItem(UpgradeItemConfig itemConfig)
+    private UpgradeItem CreateUpgradeItem(UpgradeItemConfig config)
     {
-        return new UpgradeItem(itemConfig.Id, itemConfig.UpgradeType, itemConfig.ValueUpgrade, itemConfig.ImageSprite);        
+        return new UpgradeItem(config.Id, config.UpgradeType, config.ValueUpgrade, config.ImageSprite);        
     }
-
-    public Dictionary<int, UpgradeItem> GetItemsMapBbyId()
+    private AbilityItem CreateAbilityItem(AbilityItemConfig config)
     {
-        return _itemsMapById;
-    }
+        return new AbilityItem(config.Item.Id, config.View, config.Type, config.Sprite, config.Value, config.Duration);
+    }   
 }
 
 

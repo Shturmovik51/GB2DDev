@@ -13,7 +13,7 @@ public class ShedController : BaseController, IShedController
     private readonly ProfilePlayer _profilePlayer;
     private readonly ShedView _view;
     private bool _isFirstStart = true;
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, ProfilePlayer profilePlayer,
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, ProfilePlayer profilePlayer,
                             InventoryModel inventoryModel, InventoryController inventoryController, Transform placeForUi)
     {
         _upgradeItems = upgradeItems;
@@ -40,30 +40,34 @@ public class ShedController : BaseController, IShedController
 
     public void Exit()
     {
-        UpgradeCarWithEquipedItems(_car, _inventoryModel.GetEquippedItems(), _upgradeRepository.Content);
+        UpgradeCarWithEquipedItems(_car, _inventoryModel.GetEquippedItems(), _upgradeRepository.ItemsMapBuID);
         Debug.Log($"Exit, car speed = {_car.Speed}");
     }
 
-    private void UpgradeCarWithEquipedItems(IUpgradeableCar car, IReadOnlyList<UpgradeItem> equiped, 
-                                                IReadOnlyDictionary<int, IUpgradeCarHandler> upgradeHandlers)
+    private void UpgradeCarWithEquipedItems(IUpgradeableCar car, IReadOnlyList<IItem> equiped, 
+                                            IReadOnlyDictionary<int, IUpgradeCarHandler> handlerMap)
     {
         foreach (var item in equiped)
-        {
-            if (item.IsActive && item.IsEquipped)
-                continue;
+        {            
+            var itemproperty = item.GetItemProperty<UpgradeItem>();
+            if(itemproperty != null)
+            {
+                if (itemproperty.IsActive && itemproperty.IsEquipped)
+                    continue;
 
-            if (upgradeHandlers.TryGetValue(item.ItemID, out var handler))
-            {                
-                if (item.IsActive && !item.IsEquipped)
-                {
-                    handler.Upgrade(car);
-                    item.ChangeItemEquippedStatus(true);
+                if (handlerMap.TryGetValue(item.ItemID, out var handler))
+                {                
+                    if (itemproperty.IsActive && !itemproperty.IsEquipped)
+                    {
+                        handler.Upgrade(car);
+                        itemproperty.ChangeItemEquippedStatus(true);
+                    }
+                    if(!itemproperty.IsActive && itemproperty.IsEquipped)
+                    {
+                        handler.Degrade(car);
+                        itemproperty.ChangeItemEquippedStatus(false);
+                    }                
                 }
-                if(!item.IsActive && item.IsEquipped)
-                {
-                    handler.Degrade(car);
-                    item.ChangeItemEquippedStatus(false);
-                }                
             }
         }
     }
