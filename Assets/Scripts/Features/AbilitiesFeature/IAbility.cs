@@ -2,5 +2,5 @@
 
 public interface IAbility
 {
-    void Apply(IAbilityActivator activator, AbilitiesView sender);
+    void Apply(IAbilityActivator activator);
 }

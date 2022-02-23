@@ -33,7 +33,7 @@ public class AbilityRepository : BaseController, IRepository<int, IAbility>
             case AbilityType.Smoke:
                 return new SmokeAbility(config.View, config.Duration);
             case AbilityType.Jump:
-                return new JumpAbility(null, config.Duration, config.Value);
+                return new JumpAbility(config.Duration, config.Value);
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -44,7 +44,7 @@ public class AbilityStub : IAbility
 {
     public static AbilityStub Default { get; } = new AbilityStub();
 
-    public void Apply(IAbilityActivator activator, AbilitiesView sender)
+    public void Apply(IAbilityActivator activator)
     {
     }
 }

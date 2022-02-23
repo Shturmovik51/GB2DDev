@@ -27,6 +27,6 @@ public class AbilitiesController : BaseController
     private void OnAbilityUseRequested(object sender, AbilityItem e)
     {
         if (_abilityRepository.ItemsMapBuID.TryGetValue(e.ItemID, out var ability))
-            ability.Apply(_abilityActivator, (AbilitiesView) sender);
+            ability.Apply(_abilityActivator);
     }
 }
