@@ -9,8 +9,6 @@ public class Root : MonoBehaviour
 {
     [SerializeField] private Transform _placeForUi;
     [SerializeField] private UnityAdsTools _ads;
-    [SerializeField] private UpgradeItemConfigDataSource _upgradeSource;
-    [SerializeField] private List<AbilityItemConfig> _abilityItems;
 
     private MainController _mainController;
     private IAnalyticTools _analyticsTools;
@@ -19,7 +17,7 @@ public class Root : MonoBehaviour
     {
         _analyticsTools = new UnityAnalyticTools();
         var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
-        _mainController = new MainController(_placeForUi, profilePlayer, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly());
+        _mainController = new MainController(_placeForUi, profilePlayer);
         profilePlayer.CurrentState.Value = GameState.Start;
     }
 

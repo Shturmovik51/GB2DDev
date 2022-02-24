@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class MainMenuView : MonoBehaviour, IView
 {
-    [SerializeField] private Button _buttonStart;
+    [SerializeField] private Button _buttonStartGarage;
+    [SerializeField] private Button _buttonStartRewards;
 
-    public void Init(UnityAction startGame) 
+    public void Init(UnityAction startGame, UnityAction startGarage) 
     {
-        _buttonStart.onClick.AddListener(startGame);
+        _buttonStartGarage.onClick.AddListener(startGame);
+        _buttonStartRewards.onClick.AddListener(startGarage);
     }
 
     protected void OnDestroy()
     {
-        _buttonStart.onClick.RemoveAllListeners();
+        _buttonStartGarage.onClick.RemoveAllListeners();
+        _buttonStartRewards.onClick.RemoveAllListeners();
     }
 
     public void Show()

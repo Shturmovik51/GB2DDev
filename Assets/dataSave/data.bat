@@ -1,0 +1,1 @@
+{"RewardSave":{"IntPrefsData":[{"Key":"ActiveDailySlot","Value":0},{"Key":"ActiveWeeklySlot","Value":0},{"Key":"Wood","Value":3158066},{"Key":"Diamond","Value":0}],"StringPrefsData":[{"Key":"LastDailyRewardTime","Value":"24.02.2022 23:53:33"},{"Key":"LastWeeklyRewardTime","Value":"24.02.2022 23:53:09"}]}}

@@ -4,9 +4,9 @@
 public class UpgradeItemConfigDataSource : ScriptableObject
 {
     [SerializeField]
-    private UpgradeItemConfig[] _itemConfigs;
+    private UpgradeItemConfig[] _upgradesConfigs;
 
-    public UpgradeItemConfig[] ItemConfigs => _itemConfigs;
+    public UpgradeItemConfig[] UpgradesConfigs => _upgradesConfigs;
 }
 
 public class BaseDataSource<T> : ScriptableObject where T:ScriptableObject

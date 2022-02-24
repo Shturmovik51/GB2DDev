@@ -14,7 +14,7 @@ public class MainMenuController : BaseController
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
         AddGameObjects(_view.gameObject);
-        _view.Init(StartGaRage);
+        _view.Init(StartGaRage, StartRewards);
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -28,6 +28,13 @@ public class MainMenuController : BaseController
 
         _profilePlayer.AnalyticTools.SendMessage("start_game",
             new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup } });
+    }
+    private void StartRewards()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Rewards;
+
+        _profilePlayer.AnalyticTools.SendMessage("start_rewards",
+            new Dictionary<string, object>() { { "time", Time.realtimeSinceStartup } });
     }
 }
 

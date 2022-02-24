@@ -24,11 +24,11 @@ public class GameController : BaseController
         var abilityRepository = new AbilityRepository(inventoryModel.GetEquippedItems());
         var abilityView =
             ResourceLoader.LoadAndInstantiateView<AbilitiesView>(
-                new ResourcePath() { PathResource = "Prefabs/AbilitiesView" }, uiRoot);
+                new ResourcePath() { PathResource = "Prefabs/Abilities/AbilitiesView" }, uiRoot);
         var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository, abilityView);
         AddController(abilitiesController);
 
-        var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/PauseButton"), uiRoot);
+        var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Game/PauseButton"), uiRoot);
         var pauseButton = pauseButtonObj.GetComponent<Button>();
 
         pauseButton.onClick.AddListener(shedController.ChangeShedViewActiveState);

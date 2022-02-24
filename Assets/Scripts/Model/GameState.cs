@@ -4,8 +4,10 @@
     {
         None = 0,
         Start = 1,
-        Garage = 2,
-        Game = 3
+        Rewards = 2,
+        Garage = 3,
+        Game = 4,
+        Fight = 5
     }
 }
 

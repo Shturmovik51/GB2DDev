@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShedController : BaseController, IShedController
 {
-    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
     private readonly Car _car;
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
@@ -16,7 +15,6 @@ public class ShedController : BaseController, IShedController
     public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, ProfilePlayer profilePlayer,
                             InventoryModel inventoryModel, InventoryController inventoryController, Transform placeForUi)
     {
-        _upgradeItems = upgradeItems;
         _car = profilePlayer.CurrentCar;
 
         _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
