@@ -34,6 +34,15 @@ public class GameController : BaseController
         pauseButton.onClick.AddListener(shedController.ChangeShedViewActiveState);
 
         AddGameObjects(pauseButtonObj);
+
+        var battlestartController = CreateBattleStartController(uiRoot, profilePlayer);
+    }
+
+    private BattleStartController CreateBattleStartController(Transform uiRoot, ProfilePlayer profilePlayer)
+    {
+        var startView = ResourceLoader.LoadAndInstantiateView<BattleStartView>(new ResourcePath() { PathResource = "Prefabs/BattleStart" }, uiRoot);
+        AddGameObjects(startView.gameObject);
+        return new BattleStartController(startView, profilePlayer);
     }
 }
 

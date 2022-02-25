@@ -12,7 +12,9 @@ public class MainController : BaseController
     private InventoryController _inventoryController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
+    private FightController _fightController;
     private ResourcePath _rewardView = new ResourcePath { PathResource = "Prefabs/Rewards/RewardWindow" };
+    private ResourcePath _fightView = new ResourcePath { PathResource = "Prefabs/FightWindowView" };
     private ResourcePath _currencyView = new ResourcePath { PathResource = "Prefabs/Rewards/CurrencyWindow" };
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItemConfigs;
@@ -86,13 +88,23 @@ public class MainController : BaseController
                 _shedController.Exit();
                 _gameController = new GameController(_profilePlayer, _inventoryModel, _placeForUi, _shedController);
                 _shedController?.ChangeShedViewActiveState();
+                break;
 
+            case GameState.Fight:
+                _fightController = CreateFightController();
                 break;
             default:
                 AllClear();
                 break;
         }
     }
+
+    private FightController CreateFightController()
+    {
+        var fightView = ResourceLoader.LoadAndInstantiateView<FightWindowView>(_fightView, _placeForUi);
+        return new FightController(fightView, _profilePlayer);
+    }
+
 
     private void AllClear()
     {

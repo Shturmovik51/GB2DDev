@@ -15,7 +15,7 @@ public class RewardController
     private SaveDataRepository _saveDataRepository;
     private readonly ProfilePlayer _profile;
     private bool _dailyRewardReceived = false;
-    private bool _weeklyRewardReceived = false;
+    private bool _weeklyRewardReceived = false;   
 
     public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, ProfilePlayer profile)
     {
