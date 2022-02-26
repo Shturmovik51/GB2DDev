@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class DataPlayer
 {
@@ -9,6 +8,7 @@ public class DataPlayer
     private int _countHealth;
     private int _countPower;
     private int _countCrime;
+    private int _playerAttackType;
 
     private List<IEnemy> _enemies = new List<IEnemy>();
 
@@ -67,6 +67,19 @@ public class DataPlayer
             }
         }
     }
+    public int PlayerAttackType
+    {
+        get => _playerAttackType;
+        set
+        {
+            if(_playerAttackType != value)
+            {
+                _playerAttackType = value;
+
+                Notifier(DataType.Attack);
+            }
+        }
+    }
 
     public void Attach(IEnemy enemy)
     {
@@ -105,9 +118,17 @@ public class Power : DataPlayer
     {
     }
 }
+
 public class Crime : DataPlayer
 {
     public Crime(string titleData) : base(titleData)
+    {
+    }
+}
+
+public class Attaсk : DataPlayer
+{
+    public Attaсk(string titleData) : base(titleData)
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RewardController
+public class RewardController : BaseController
 {
     private readonly RewardView _rewardView;
     private List<SlotRewardView> _daylySlots;
@@ -15,7 +15,7 @@ public class RewardController
     private SaveDataRepository _saveDataRepository;
     private readonly ProfilePlayer _profile;
     private bool _dailyRewardReceived = false;
-    private bool _weeklyRewardReceived = false;   
+    private bool _weeklyRewardReceived = false;
 
     public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, ProfilePlayer profile)
     {
@@ -24,11 +24,15 @@ public class RewardController
         _profile = profile;
         currencyWindow.Init(profile.RewardData.Diamond, profile.RewardData.Wood);
         //saveDataRepository.Load();
+
         InitSlots();
         RefreshUi();
-        _rewardView.StartCoroutine(UpdateCoroutine());
         SubscribeButtons();
 
+        AddGameObjects(_rewardView.gameObject);
+        AddGameObjects(currencyWindow.gameObject);
+
+        _rewardView.StartCoroutine(UpdateCoroutine());
         _rewardView.ShowDailyRewardsButton.onClick.Invoke();
     }
 
@@ -110,7 +114,6 @@ public class RewardController
             dayDelta = new TimeSpan(0);
 
         _rewardView.DailyRewardTimer.text = dayDelta.ToString();
-
 
         _rewardView.DailyRewardTimerImage.fillAmount = 
                     (_rewardView.DayTimeCooldown - (float)dayDelta.TotalSeconds) / _rewardView.DayTimeCooldown;

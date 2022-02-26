@@ -13,7 +13,9 @@ internal class InputJoystickView : BaseInputView
 
     private void OnDestroy()
     {
-        UpdateManager.UnsubscribeFromUpdate(Move);
+        CrossPlatformInputManager.UnRegisterVirtualAxis("Horizontal");
+        CrossPlatformInputManager.UnRegisterVirtualAxis("Vertical");
+        UpdateManager.UnsubscribeFromUpdate(Move);        
     }
 
     private void Move()

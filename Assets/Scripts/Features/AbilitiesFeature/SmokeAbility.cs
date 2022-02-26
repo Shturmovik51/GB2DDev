@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class SmokeAbility : IAbility
+public class SmokeAbility : BaseController, IAbility
 {
     private SpriteRenderer[] _spriteRenderers;
     private readonly GameObject _smoke;
@@ -18,7 +18,8 @@ public class SmokeAbility : IAbility
     {
         _abilityDuration = abilityDuration;
         _smoke = Object.Instantiate(viewPrefab);
-        //_smoke.SetActive(false);
+        AddGameObjects(_smoke);
+        _smoke.SetActive(false);
 
         _spriteRenderers = _smoke.GetComponentsInChildren<SpriteRenderer>();
 
@@ -36,7 +37,7 @@ public class SmokeAbility : IAbility
             return;       
 
         _smoke.transform.position = activator.GetViewObject().transform.position;
-        //_smoke.SetActive(true);
+        _smoke.SetActive(true);
 
         var showColor = new Color(_spriteRenderers[0].color.r, _spriteRenderers[0].color.g, _spriteRenderers[0].color.b, 1);
         var hideColor = new Color(_spriteRenderers[0].color.r, _spriteRenderers[0].color.g, _spriteRenderers[0].color.b, 0);
@@ -58,6 +59,12 @@ public class SmokeAbility : IAbility
             _sequence.Join(_spriteRenderers[i].DOColor(hideColor, ShowAndHideDuration));
 
         }
-        _sequence.OnComplete(() => _sequence = null);
+        _sequence.OnComplete(DisApply);
+    }
+
+    private void DisApply()
+    {
+        _sequence = null;
+        _smoke.SetActive(false);
     }
 }

@@ -22,7 +22,7 @@ public class InventoryController : BaseController, IInventoryController
 
     public void InitInventoryView(Transform cellPlace)
     {
-        _inventoryView.Init(cellPlace);
+        _inventoryView.Init(cellPlace);        
     }
 
     public void RefreshInventory(UpgradeItem item)

@@ -22,12 +22,15 @@ public class ShedController : BaseController, IShedController
 
         _view = LoadView(placeForUi);      
         _view.Init(StartGame);
+        AddGameObjects(_view.gameObject);
         
         _inventoryController = inventoryController;
         _inventoryController.InitInventoryView(_view.PlaceForShedInventory);
         _inventoryModel = inventoryModel;
 
          _profilePlayer = profilePlayer;
+
+        EquipAbilities();
     }
 
     public void Enter()
@@ -81,16 +84,26 @@ public class ShedController : BaseController, IShedController
         {
             _view.SetButtonTextAsContinue();
             _isFirstStart = false;
+            _profilePlayer.CurrentState.Value = GameState.Game;
+
+            _profilePlayer.AnalyticTools.SendMessage("start_game",
+                new Dictionary<string, object>() { { "time", Time.realtimeSinceStartup } });
         }
 
-        _profilePlayer.CurrentState.Value = GameState.Game;
-
-        _profilePlayer.AnalyticTools.SendMessage("start_game",
-            new Dictionary<string, object>() { { "time", Time.realtimeSinceStartup } });
+        ChangeShedViewActiveState(false);
     }
 
-    public void ChangeShedViewActiveState()
+    public void ChangeShedViewActiveState(bool value)
     {
-        _view.gameObject.SetActive(_view.gameObject.activeInHierarchy ? false : true);
+        _view.gameObject.SetActive(value);
+    }
+
+    private void EquipAbilities()
+    {
+        foreach (var item in _inventoryController.ItemsRepository.ItemsMapBuID)
+        {
+            if (item.Value is AbilityItem)
+                _inventoryModel.EquipItem(item.Value);
+        }
     }
 }

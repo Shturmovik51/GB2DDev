@@ -1,6 +1,6 @@
 ﻿public enum AttackType
 {
-    None = 1,
-    Knife = 2,
-    Gun = 3
+    None = 0,
+    Knife = 1,
+    Gun = 2
 }

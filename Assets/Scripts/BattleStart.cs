@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class BattleStartView : MonoBehaviour, IView
+public class BattleStart : MonoBehaviour, IView
 {
     [SerializeField] private Button _startFightButton;
 
     public void Init(UnityAction startBattle)
     {
-
+        _startFightButton.onClick.AddListener(startBattle);
     }
 
     public void Hide()
@@ -20,6 +20,10 @@ public class BattleStartView : MonoBehaviour, IView
     public void Show()
     {
         throw new System.NotImplementedException();
+    }
+    private void OnDisable()
+    {
+        _startFightButton.onClick.RemoveAllListeners();
     }
 }
 

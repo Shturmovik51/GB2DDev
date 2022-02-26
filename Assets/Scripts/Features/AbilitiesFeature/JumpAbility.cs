@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class JumpAbility : IAbility
+public class JumpAbility : BaseController, IAbility
 {
     private readonly float _abilityDuration;
     private readonly float _jumpForse;

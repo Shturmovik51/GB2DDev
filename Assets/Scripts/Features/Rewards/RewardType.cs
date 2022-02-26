@@ -1,6 +1,6 @@
 ﻿public enum RewardType
 {
-    None,
-    Wood,
-    Diamond
+    None = 0,
+    Wood = 1,
+    Diamond = 2
 }

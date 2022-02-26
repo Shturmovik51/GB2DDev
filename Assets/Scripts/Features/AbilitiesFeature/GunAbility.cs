@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class GunAbility : IAbility
+public class GunAbility : BaseController, IAbility
 {
     private readonly Rigidbody2D _viewPrefab;
     private readonly float _projectileSpeed;

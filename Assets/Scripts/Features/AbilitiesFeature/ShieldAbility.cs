@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ShieldAbility : IAbility
+public class ShieldAbility : BaseController, IAbility
 {
     private readonly GameObject _shield;
     private readonly float _abilityDuration;
@@ -14,6 +14,7 @@ public class ShieldAbility : IAbility
     {
         _abilityDuration = abilityDuration;
         _shield = Object.Instantiate(viewPrefab);
+        AddGameObjects(_shield);
         _shield.SetActive(false);
         _spriteRenderer = _shield.GetComponent<SpriteRenderer>();
 
@@ -37,8 +38,11 @@ public class ShieldAbility : IAbility
         _sequence.Append(_spriteRenderer.DOColor(showColor, ShowAndHideDuration));
         _sequence.AppendInterval(_abilityDuration);
         _sequence.Append(_spriteRenderer.DOColor(hideColor, ShowAndHideDuration));
-        _sequence.OnComplete(() => _sequence = null);
+        _sequence.OnComplete(DisApply);
     }
-
-    
+    private void DisApply()
+    {
+        _sequence = null;
+        _shield.SetActive(false);
+    }
 }

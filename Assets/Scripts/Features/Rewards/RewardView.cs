@@ -34,12 +34,19 @@ public class RewardView : MonoBehaviour , IView
     [SerializeField] public Image WeeklyRewardTimerImage;
     #endregion
 
+    private Image _defaultButtonImage;
+
     public void ResetRewardsShowCondition()
     {
+        if(_defaultButtonImage == null)
+        {
+            _defaultButtonImage = ResetButton.image;
+        }
+
         DailySlotsParent.gameObject.SetActive(false);
         WeeklySlotsParent.gameObject.SetActive(false);
-        ShowDailyRewardsButton.image.color = Color.white;
-        ShowWeeklyRewardsButton.image.color = Color.white;
+        ShowDailyRewardsButton.image.color = _defaultButtonImage.color;
+        ShowWeeklyRewardsButton.image.color = _defaultButtonImage.color;
     }
 
 

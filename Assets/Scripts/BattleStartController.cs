@@ -2,10 +2,10 @@
 
 public class BattleStartController : BaseController
 {
-    private readonly BattleStartView _view;
+    private readonly BattleStart _view;
     private readonly ProfilePlayer _model;
 
-    public BattleStartController(BattleStartView view, ProfilePlayer model)
+    public BattleStartController(BattleStart view, ProfilePlayer model)
     {
         _view = view;
         _model = model;

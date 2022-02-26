@@ -7,6 +7,7 @@ public class InputGameController : BaseController
     {
         _view = LoadView();
         _view.Init(leftMove, rightMove, car.Speed);
+        AddGameObjects(_view.gameObject);
     }
 
     private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/Game/StickControl"};

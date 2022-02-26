@@ -27,20 +27,28 @@ public class AbilityRepository : BaseController, IRepository<int, IAbility>
             case AbilityType.None:
                 return AbilityStub.Default;
             case AbilityType.Gun:
-                return new GunAbility(config.View, config.Value);
+                var gunAbility = new GunAbility(config.View, config.Value);
+                AddController(gunAbility);
+                return gunAbility;
             case AbilityType.Shield:
-                return new ShieldAbility(config.View, config.Duration);
+                var shieldAbility = new ShieldAbility(config.View, config.Duration);
+                AddController(shieldAbility);
+                return shieldAbility;
             case AbilityType.Smoke:
-                return new SmokeAbility(config.View, config.Duration);
+                var smokeAbility = new SmokeAbility(config.View, config.Duration);
+                AddController(smokeAbility);
+                return smokeAbility;
             case AbilityType.Jump:
-                return new JumpAbility(config.Duration, config.Value);
+                var jumpAbility = new JumpAbility(config.Duration, config.Value);
+                AddController(jumpAbility);
+                return jumpAbility;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 }
 
-public class AbilityStub : IAbility
+public class AbilityStub : BaseController, IAbility
 {
     public static AbilityStub Default { get; } = new AbilityStub();
 
