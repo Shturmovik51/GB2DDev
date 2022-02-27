@@ -294,8 +294,8 @@ GameObject:
   - component: {fileID: 8038354548278498331}
   - component: {fileID: 5370479011414012121}
   - component: {fileID: 8452875686645538520}
-  - component: {fileID: 3299403134447680499}
   - component: {fileID: 8607367565587496666}
+  - component: {fileID: 2558154997267850576}
   m_Layer: 5
   m_Name: UpgradeItemView
   m_TagString: Untagged
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3299403134447680499
+--- !u!114 &8607367565587496666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,7 +370,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2995173066690591423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 509837b2e78224d468efa1a67b052ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 2558154997267850576}
+  _buttonImage: {fileID: 8452875686645538520}
+  _descriptionObj: {fileID: 1551588191787804572}
+  _upgradeTupeText: {fileID: 8215955967623877198}
+  _upgradeValueText: {fileID: 3995817605071158209}
+  _toggle: {fileID: 7046831026110978646}
+--- !u!114 &2558154997267850576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995173066690591423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -404,24 +422,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8607367565587496666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2995173066690591423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 509837b2e78224d468efa1a67b052ed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 3299403134447680499}
-  _buttonImage: {fileID: 8452875686645538520}
-  _descriptionObj: {fileID: 1551588191787804572}
-  _upgradeTupeText: {fileID: 8215955967623877198}
-  _upgradeValueText: {fileID: 3995817605071158209}
-  _toggle: {fileID: 7046831026110978646}
 --- !u!1 &6263465370664321862
 GameObject:
   m_ObjectHideFlags: 0

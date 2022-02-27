@@ -3,6 +3,7 @@ using Saves;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainController : BaseController
 {
@@ -51,7 +52,7 @@ public class MainController : BaseController
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose(); 
                 _rewardController?.Dispose();
-               // _inventoryController?.Dispose();
+                // _inventoryController?.Dispose();                
                 break;
 
             case GameState.Rewards:
@@ -108,5 +109,5 @@ public class MainController : BaseController
         _inventoryController?.Dispose();
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
-    }
+    }    
 }

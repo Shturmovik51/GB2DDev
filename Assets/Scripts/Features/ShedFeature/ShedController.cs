@@ -75,7 +75,7 @@ public class ShedController : BaseController, IShedController
 
     private ShedView LoadView(Transform placeForUi)
     {
-        return ResourceLoader.LoadAndInstantiateView<ShedView>(_viewPath, placeForUi);
+        return ResourceLoader.LoadAndInstantiateView<ShedView>(_viewPath, placeForUi);       
     }
 
     private void StartGame()
@@ -95,7 +95,8 @@ public class ShedController : BaseController, IShedController
 
     public void ChangeShedViewActiveState(bool value)
     {
-        _view.gameObject.SetActive(value);
+        _view.transform.SetAsLastSibling();
+        _view.gameObject.SetActive(value);        
     }
 
     private void EquipAbilities()

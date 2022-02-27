@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6623108646873021292}
   - component: {fileID: 2183348720300410347}
   - component: {fileID: 6142751360481708609}
-  - component: {fileID: 7618942815963159774}
   - component: {fileID: 6011335758605067855}
+  - component: {fileID: 1295160375637151948}
   m_Layer: 5
   m_Name: FightButton
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7618942815963159774
+--- !u!114 &6011335758605067855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1884541912625993056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: ef59cd5577798c148868242a83b304da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startFightButton: {fileID: 1295160375637151948}
+--- !u!114 &1295160375637151948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884541912625993056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -120,19 +133,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6011335758605067855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884541912625993056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef59cd5577798c148868242a83b304da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startFightButton: {fileID: 7618942815963159774}
 --- !u!1 &7174272994395959350
 GameObject:
   m_ObjectHideFlags: 0

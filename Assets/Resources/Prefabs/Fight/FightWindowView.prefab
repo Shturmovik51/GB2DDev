@@ -144,9 +144,9 @@ GameObject:
   - component: {fileID: 6640454472806126534}
   - component: {fileID: 5468216852915725061}
   - component: {fileID: 535285056738235388}
-  - component: {fileID: 8769977458052163560}
+  - component: {fileID: 8243248541517650103}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8769977458052163560
+--- !u!114 &8243248541517650103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 983430163852404141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 3136811119793688481}
   - component: {fileID: 7430620379955878589}
   - component: {fileID: 6630539334054059610}
-  - component: {fileID: 2057898683029384244}
+  - component: {fileID: 5531522267917847629}
   m_Layer: 5
   m_Name: MinusCrimeRate
   m_TagString: Untagged
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2057898683029384244
+--- !u!114 &5531522267917847629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3275482408412035936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -648,9 +648,9 @@ GameObject:
   - component: {fileID: 7961024577969340176}
   - component: {fileID: 2433774011059387256}
   - component: {fileID: 5838558063999089527}
-  - component: {fileID: 9123564395186591986}
+  - component: {fileID: 6503647645273314937}
   m_Layer: 5
-  m_Name: Skip
+  m_Name: SkipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9123564395186591986
+--- !u!114 &6503647645273314937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4412137610511122561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 5863155792602278031}
   - component: {fileID: 1451607818891817932}
   - component: {fileID: 670351413010549408}
-  - component: {fileID: 3241132952273124263}
+  - component: {fileID: 1866922299318104419}
   m_Layer: 5
   m_Name: AddCrimeRate
   m_TagString: Untagged
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3241132952273124263
+--- !u!114 &1866922299318104419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6792700955595169689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1551,9 +1551,9 @@ GameObject:
   - component: {fileID: 7415079832383400592}
   - component: {fileID: 7415079832383400605}
   - component: {fileID: 7415079832383400594}
-  - component: {fileID: 7415079832383400595}
+  - component: {fileID: 2600026385765488700}
   m_Layer: 5
-  m_Name: Add Power
+  m_Name: AddPowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079832383400595
+--- !u!114 &2600026385765488700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1625,7 +1625,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079832383400593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1670,9 +1670,9 @@ GameObject:
   - component: {fileID: 7415079832463288021}
   - component: {fileID: 7415079832463288022}
   - component: {fileID: 7415079832463288023}
-  - component: {fileID: 7415079832463288020}
+  - component: {fileID: 8027033636905213156}
   m_Layer: 5
-  m_Name: Minus Money
+  m_Name: MinusMoneyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079832463288020
+--- !u!114 &8027033636905213156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079832463288042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1858,19 +1858,19 @@ MonoBehaviour:
   _attackTypePlayerText: {fileID: 824130585165429576}
   _attackTypeEnemyText: {fileID: 7424717734476769066}
   _fightResult: {fileID: 7103664177701543859}
-  _addMoneyButton: {fileID: 7415079833018120089}
-  _minusMoneyButton: {fileID: 7415079832463288020}
-  _addHealthButton: {fileID: 7415079833401833620}
-  _minusHealthButton: {fileID: 7415079833826764265}
-  _addPowerButton: {fileID: 7415079832383400595}
-  _minusPowerButton: {fileID: 7415079833594544069}
-  _addCrimeRate: {fileID: 3241132952273124263}
-  _minusCrimeRate: {fileID: 2057898683029384244}
-  _setKnife: {fileID: 4229802159687800125}
-  _setGun: {fileID: 229046300498690860}
-  _fightButton: {fileID: 7415079832878007794}
-  _skipButton: {fileID: 9123564395186591986}
-  _closeButton: {fileID: 8769977458052163560}
+  _addMoneyButton: {fileID: 7511846005349183126}
+  _minusMoneyButton: {fileID: 8027033636905213156}
+  _addHealthButton: {fileID: 3861925487977345030}
+  _minusHealthButton: {fileID: 6542202675394271978}
+  _addPowerButton: {fileID: 2600026385765488700}
+  _minusPowerButton: {fileID: 7232869082041347447}
+  _addCrimeRate: {fileID: 1866922299318104419}
+  _minusCrimeRate: {fileID: 5531522267917847629}
+  _setKnife: {fileID: 6540308935456140545}
+  _setGun: {fileID: 8101062227510997256}
+  _fightButton: {fileID: 6400517867187987976}
+  _skipButton: {fileID: 6503647645273314937}
+  _closeButton: {fileID: 8243248541517650103}
 --- !u!1 &7415079832496245235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,9 +2222,9 @@ GameObject:
   - component: {fileID: 7415079832878007795}
   - component: {fileID: 7415079832878007804}
   - component: {fileID: 7415079832878007805}
-  - component: {fileID: 7415079832878007794}
+  - component: {fileID: 6400517867187987976}
   m_Layer: 5
-  m_Name: Fight
+  m_Name: FightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079832878007794
+--- !u!114 &6400517867187987976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079832878007792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2549,9 +2549,9 @@ GameObject:
   - component: {fileID: 7415079833018120094}
   - component: {fileID: 7415079833018120091}
   - component: {fileID: 7415079833018120088}
-  - component: {fileID: 7415079833018120089}
+  - component: {fileID: 7511846005349183126}
   m_Layer: 5
-  m_Name: Add Money
+  m_Name: AddMoneyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2614,7 +2614,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079833018120089
+--- !u!114 &7511846005349183126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079833018120095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3200,9 +3200,9 @@ GameObject:
   - component: {fileID: 7415079833401833621}
   - component: {fileID: 7415079833401833622}
   - component: {fileID: 7415079833401833623}
-  - component: {fileID: 7415079833401833620}
+  - component: {fileID: 3861925487977345030}
   m_Layer: 5
-  m_Name: Add Health
+  m_Name: AddHealthButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3265,7 +3265,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079833401833620
+--- !u!114 &3861925487977345030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3274,7 +3274,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079833401833642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3319,9 +3319,9 @@ GameObject:
   - component: {fileID: 7415079833594544090}
   - component: {fileID: 7415079833594544071}
   - component: {fileID: 7415079833594544068}
-  - component: {fileID: 7415079833594544069}
+  - component: {fileID: 7232869082041347447}
   m_Layer: 5
-  m_Name: Minus Power
+  m_Name: MinusPowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3384,7 +3384,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079833594544069
+--- !u!114 &7232869082041347447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3393,7 +3393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079833594544091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3571,9 +3571,9 @@ GameObject:
   - component: {fileID: 7415079833826764270}
   - component: {fileID: 7415079833826764267}
   - component: {fileID: 7415079833826764264}
-  - component: {fileID: 7415079833826764265}
+  - component: {fileID: 6542202675394271978}
   m_Layer: 5
-  m_Name: Minus Health
+  m_Name: MinusHealthButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3636,7 +3636,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7415079833826764265
+--- !u!114 &6542202675394271978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3645,7 +3645,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7415079833826764271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3823,9 +3823,9 @@ GameObject:
   - component: {fileID: 3281600166947017781}
   - component: {fileID: 5909887109655488821}
   - component: {fileID: 3896227117496553656}
-  - component: {fileID: 229046300498690860}
+  - component: {fileID: 8101062227510997256}
   m_Layer: 5
-  m_Name: SetGun
+  m_Name: SetGunButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3888,7 +3888,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &229046300498690860
+--- !u!114 &8101062227510997256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3897,7 +3897,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7947136344951117496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3942,9 +3942,9 @@ GameObject:
   - component: {fileID: 7066080163374024391}
   - component: {fileID: 536574129198641485}
   - component: {fileID: 2661185203395657003}
-  - component: {fileID: 4229802159687800125}
+  - component: {fileID: 6540308935456140545}
   m_Layer: 5
-  m_Name: SetKnife
+  m_Name: SetKnifeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4007,7 +4007,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4229802159687800125
+--- !u!114 &6540308935456140545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4016,7 +4016,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7948975664393771120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ef8c0dc8e9fbb84c9cfc85fe90200d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
