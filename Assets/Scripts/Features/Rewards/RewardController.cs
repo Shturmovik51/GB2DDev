@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,11 +70,20 @@ public class RewardController : BaseController
     
     private void SubscribeButtons()
     {
-        _rewardView.GetRewardButton.onClick.AddListener(ClaimReward);
         _rewardView.ResetButton.onClick.AddListener(ResetReward);
         _rewardView.CloseButton.onClick.AddListener(CloseRewardScreen);
+
+        _rewardView.GetRewardButton.onClick.AddListener(() => 
+                ClaimReward(_rewardView.DailySlotsParent, _dailyRewardModel, _profile.RewardData.CurrentActiveDailySlot, 
+                    _profile.RewardData.LastDailyRewardTime));
+
+        _rewardView.GetRewardButton.onClick.AddListener(() => 
+                ClaimReward(_rewardView.WeeklySlotsParent, _weeklyRewardModel, _profile.RewardData.CurrentActiveWeeklySlot,
+                    _profile.RewardData.LastWeeklyRewardTime));
+
         _rewardView.ShowDailyRewardsButton.onClick.AddListener(() => 
                     SetRewardWindow(_rewardView.DailySlotsParent, _rewardView.ShowDailyRewardsButton));
+
         _rewardView.ShowWeeklyRewardsButton.onClick.AddListener(() => 
                     SetRewardWindow(_rewardView.WeeklySlotsParent, _rewardView.ShowWeeklyRewardsButton));
     }
@@ -97,14 +107,15 @@ public class RewardController : BaseController
         _profile.RewardData.CurrentActiveWeeklySlot.Value = 0;
     }
 
-    private void ClaimReward()
+    private void ClaimReward(Transform slotParent, RewardModel model, SubscriptionProperty<int> currentActiveSlot, 
+                                SubscriptionProperty<DateTime?> lastRewardTime)
     {
-        if (_rewardView.DailySlotsParent.gameObject.activeInHierarchy)
+        if (slotParent.gameObject.activeInHierarchy)
         {
-            if (_dailyRewardModel.IsRewardReceived)
+            if (model.IsRewardReceived)
                 return;
 
-            var reward = _dailyRewardModel.Rewards[_profile.RewardData.CurrentActiveDailySlot.Value];
+            var reward = model.Rewards[currentActiveSlot.Value];
             switch (reward.Type)
             {
                 case RewardType.None:
@@ -118,35 +129,10 @@ public class RewardController : BaseController
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            _profile.RewardData.LastDailyRewardTime.Value = DateTime.UtcNow;
-            _profile.RewardData.CurrentActiveDailySlot.Value = (_profile.RewardData.CurrentActiveDailySlot.Value + 1) % _dailyRewardModel.Rewards.Count;
+            lastRewardTime.Value = DateTime.UtcNow;
+            currentActiveSlot.Value = (currentActiveSlot.Value + 1) % model.Rewards.Count;
         }
 
-        if (_rewardView.WeeklySlotsParent.gameObject.activeInHierarchy)
-        {
-            if (_weeklyRewardModel.IsRewardReceived)
-                return;
-
-            var reward = _weeklyRewardModel.Rewards[_profile.RewardData.CurrentActiveWeeklySlot.Value];
-            switch (reward.Type)
-            {
-                case RewardType.None:
-                    break;
-                case RewardType.Wood:
-                    _profile.RewardData.Wood.Value += reward.Count;
-                    break;
-                case RewardType.Diamond:
-                    _profile.RewardData.Diamond.Value += reward.Count;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            _profile.RewardData.LastWeeklyRewardTime.Value = DateTime.UtcNow;
-            _profile.RewardData.CurrentActiveWeeklySlot.Value = (_profile.RewardData.CurrentActiveWeeklySlot.Value + 1) % _weeklyRewardModel.Rewards.Count;
-        }       
-        
         _rewardRefresher.RefreshRewardState();
     }
     private void CloseRewardScreen()

@@ -45,6 +45,7 @@ public class RewardView : MonoBehaviour, IView
         ResetButton.onClick.RemoveAllListeners();
         ShowDailyRewardsButton.onClick.RemoveAllListeners();
         ShowWeeklyRewardsButton.onClick.RemoveAllListeners();
+        CloseButton.onClick.RemoveAllListeners();
     }
 
     public void Hide()
