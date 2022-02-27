@@ -62,30 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c67b89bad513a498c095c835c64cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayTimeCooldown: 5
-  WeekTimeCooldown: 15
-  DayTimeDeadline: 10
-  WeekTimeDeadline: 30
-  DailyRewards:
-  - Count: 100
-    Type: 1
-    Icon: {fileID: 0}
-  - Count: 100
-    Type: 1
-    Icon: {fileID: 0}
-  - Count: 100
-    Type: 1
-    Icon: {fileID: 0}
-  WeeklyRewards:
-  - Count: 10
-    Type: 2
-    Icon: {fileID: 0}
-  - Count: 10
-    Type: 2
-    Icon: {fileID: 0}
-  - Count: 10
-    Type: 2
-    Icon: {fileID: 0}
   DailyRewardTimer: {fileID: 4408575932414960047}
   WeeklyRewardTimer: {fileID: 1985872230299077787}
   DailySlotsParent: {fileID: 2273395993478823249}
@@ -96,6 +72,7 @@ MonoBehaviour:
   GetRewardButton: {fileID: 1998318943378650811}
   ShowDailyRewardsButton: {fileID: 5398956423283537240}
   ShowWeeklyRewardsButton: {fileID: 2814624606615631793}
+  CloseButton: {fileID: 592792064387936979}
   DailyRewardTimerImage: {fileID: 1750852818775940080}
   WeeklyRewardTimerImage: {fileID: 6703076969978204667}
 --- !u!1 &819129409717419602
@@ -703,7 +680,7 @@ GameObject:
   - component: {fileID: 1184206901288484557}
   - component: {fileID: 592792064387936979}
   m_Layer: 5
-  m_Name: PauseButton
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

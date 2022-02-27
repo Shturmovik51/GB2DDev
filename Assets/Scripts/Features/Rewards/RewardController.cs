@@ -1,32 +1,47 @@
-﻿using Profile;
-using Saves;
+﻿using Saves;
 using System;
-//using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RewardController : BaseController
 {
     private readonly RewardView _rewardView;
-    private List<SlotRewardView> _daylySlots;
-    private List<SlotRewardView> _weeklySlots;
+    private readonly RewardModel _dailyRewardModel;
+    private readonly RewardModel _weeklyRewardModel;
     private SaveDataRepository _saveDataRepository;
-    private readonly ProfilePlayer _profile;
-    private bool _dailyRewardReceived = false;
-    private bool _weeklyRewardReceived = false;
+    private RewardRefresher _rewardRefresher;
+    private ProfilePlayer _profile;
 
     public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, ProfilePlayer profile)
     {
         _rewardView = rewardView;
+
+        _dailyRewardModel = new RewardModel(ResourcePaths.DailyRewardsPath, rewardView.DailySlotsParent);
+        _weeklyRewardModel = new RewardModel(ResourcePaths.WeeklyRewardsPath, rewardView.WeeklySlotsParent);
+        _dailyRewardModel.InitSlots(rewardView.SlotPrefab);
+        _weeklyRewardModel.InitSlots(rewardView.SlotPrefab);
+
+        var dailyRewardRefreshModel = new RewardRefresherModel(_dailyRewardModel, profile.RewardData.LastDailyRewardTime, 
+                                                            _rewardView.DailyRewardTimer, _rewardView.DailyRewardTimerImage, 
+                                                            profile.RewardData.CurrentActiveDailySlot, _rewardView.GetRewardButton);
+        var weeklyRewardRefreshModel = new RewardRefresherModel(_weeklyRewardModel, profile.RewardData.LastWeeklyRewardTime,
+                                                            _rewardView.WeeklyRewardTimer, _rewardView.WeeklyRewardTimerImage, 
+                                                            profile.RewardData.CurrentActiveWeeklySlot, _rewardView.GetRewardButton);
+        _rewardRefresher = new RewardRefresher();
+        AddController(_rewardRefresher);
+
+        _rewardRefresher.AddModel(dailyRewardRefreshModel);
+        _rewardRefresher.AddModel(weeklyRewardRefreshModel);
+
         _saveDataRepository = saveDataRepository;
         _profile = profile;
         currencyWindow.Init(profile.RewardData.Diamond, profile.RewardData.Wood);
         //saveDataRepository.Load();
 
-        InitSlots();
-        RefreshUi();
+        _rewardRefresher.RefreshUi();
         SubscribeButtons();
 
         AddGameObjects(_rewardView.gameObject);
@@ -41,120 +56,22 @@ public class RewardController : BaseController
         while (true)
         {
             Update();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
         }
     }
 
     private void Update()
     {
-        RefreshRewardState();
-        RefreshUi();
+        _rewardRefresher.RefreshRewardState();
+        _rewardRefresher.RefreshUi();
         //_saveDataRepository.Save();
     }
-
-    private void RefreshRewardState()
-    {
-        _dailyRewardReceived = false;
-        _weeklyRewardReceived = false;
-
-        if (_profile.RewardData.LastDailyRewardTime.Value.HasValue)
-        {
-            Refresh(_profile.RewardData.LastDailyRewardTime.Value, ref _rewardView.DayTimeDeadline, 
-                    _profile.RewardData.CurrentActiveDailySlot.Value, ref _rewardView.DayTimeCooldown, ref _dailyRewardReceived);          
-        }
-
-        if (_profile.RewardData.LastWeeklyRewardTime.Value.HasValue)
-        {
-            Refresh(_profile.RewardData.LastWeeklyRewardTime.Value, ref _rewardView.WeekTimeDeadline,
-                   _profile.RewardData.CurrentActiveWeeklySlot.Value, ref _rewardView.WeekTimeCooldown, ref _weeklyRewardReceived);
-        }
-
-        void Refresh(DateTime? lastRewardTime, ref int timeDeadLine, int activeSlot, ref int timeCD, ref bool isRewardReceived)
-        {
-            var timeSpan = DateTime.UtcNow - lastRewardTime.Value;
-            if (timeSpan.Seconds > timeDeadLine)
-            {
-                lastRewardTime = null;
-                activeSlot = 0;
-            }
-            else if (timeSpan.Seconds < timeCD)
-            {
-                isRewardReceived = true;
-            }
-        }
-    }
-
-    private void RefreshUi()
-    {
-        if (_rewardView.DailySlotsParent.gameObject.activeInHierarchy)
-        {
-            _rewardView.GetRewardButton.interactable = !_dailyRewardReceived;
-        }
-
-        if (_rewardView.WeeklySlotsParent.gameObject.activeInHierarchy)
-        {
-            _rewardView.GetRewardButton.interactable = !_weeklyRewardReceived;
-        }
-
-        for (var i = 0; i < _rewardView.DailyRewards.Count; i++)
-        {
-            _daylySlots[i].SetData(i <= _profile.RewardData.CurrentActiveDailySlot.Value);
-        }
-
-        for (var i = 0; i < _rewardView.WeeklyRewards.Count; i++)
-        {
-            _weeklySlots[i].SetData(i <= _profile.RewardData.CurrentActiveWeeklySlot.Value);
-        }
-
-        DateTime nextDailyBonusTime = !_profile.RewardData.LastDailyRewardTime.Value.HasValue ? DateTime.MinValue
-                : _profile.RewardData.LastDailyRewardTime.Value.Value.AddSeconds(_rewardView.DayTimeCooldown);
-
-        var dayDelta = nextDailyBonusTime - DateTime.UtcNow;
-        if (dayDelta.TotalSeconds < 0)
-            dayDelta = new TimeSpan(0);
-
-        _rewardView.DailyRewardTimer.text = dayDelta.ToString();
-
-        _rewardView.DailyRewardTimerImage.fillAmount = 
-                    (_rewardView.DayTimeCooldown - (float)dayDelta.TotalSeconds) / _rewardView.DayTimeCooldown;
-
-        DateTime nextWeeklyBonusTime = !_profile.RewardData.LastWeeklyRewardTime.Value.HasValue ? DateTime.MinValue
-                : _profile.RewardData.LastWeeklyRewardTime.Value.Value.AddSeconds(_rewardView.WeekTimeCooldown);
-
-        var weekDelta = nextWeeklyBonusTime - DateTime.UtcNow;
-        if (weekDelta.TotalSeconds < 0)
-            weekDelta = new TimeSpan(0);
-
-        _rewardView.WeeklyRewardTimer.text = weekDelta.ToString();
-        _rewardView.WeeklyRewardTimerImage.fillAmount =
-                    (_rewardView.WeekTimeCooldown - (float)weekDelta.TotalSeconds) / _rewardView.WeekTimeCooldown;
-    }
-
-    private void InitSlots()
-    {
-        _daylySlots = new List<SlotRewardView>();
-        _weeklySlots = new List<SlotRewardView>();
-
-        for (int i = 0; i < _rewardView.DailyRewards.Count; i++)
-        {
-            var reward = _rewardView.DailyRewards[i];
-            var slotInstance = GameObject.Instantiate(_rewardView.SlotPrefab, _rewardView.DailySlotsParent, false);
-            slotInstance.SetData(reward, PrefsKeys.DayCountTimerKey, i + 1, false);
-            _daylySlots.Add(slotInstance);
-        }
-        for (int i = 0; i < _rewardView.WeeklyRewards.Count; i++)
-        {
-            var reward = _rewardView.WeeklyRewards[i];
-            var slotInstance = GameObject.Instantiate(_rewardView.SlotPrefab, _rewardView.WeeklySlotsParent, false);
-            slotInstance.SetData(reward, PrefsKeys.WeekCountTimerKey, i + 1, false);
-            _weeklySlots.Add(slotInstance);
-        }
-    }
-
+    
     private void SubscribeButtons()
     {
         _rewardView.GetRewardButton.onClick.AddListener(ClaimReward);
         _rewardView.ResetButton.onClick.AddListener(ResetReward);
+        _rewardView.CloseButton.onClick.AddListener(CloseRewardScreen);
         _rewardView.ShowDailyRewardsButton.onClick.AddListener(() => 
                     SetRewardWindow(_rewardView.DailySlotsParent, _rewardView.ShowDailyRewardsButton));
         _rewardView.ShowWeeklyRewardsButton.onClick.AddListener(() => 
@@ -169,7 +86,7 @@ public class RewardController : BaseController
         _rewardView.ResetRewardsShowCondition();
         button.image.color = Color.green;
         grid.gameObject.SetActive(true);
-        RefreshUi();
+        _rewardRefresher.RefreshUi();
     }
 
     private void ResetReward()
@@ -184,10 +101,10 @@ public class RewardController : BaseController
     {
         if (_rewardView.DailySlotsParent.gameObject.activeInHierarchy)
         {
-            if (_dailyRewardReceived)
+            if (_dailyRewardModel.IsRewardReceived)
                 return;
 
-            var reward = _rewardView.DailyRewards[_profile.RewardData.CurrentActiveDailySlot.Value];
+            var reward = _dailyRewardModel.Rewards[_profile.RewardData.CurrentActiveDailySlot.Value];
             switch (reward.Type)
             {
                 case RewardType.None:
@@ -203,15 +120,15 @@ public class RewardController : BaseController
             }
 
             _profile.RewardData.LastDailyRewardTime.Value = DateTime.UtcNow;
-            _profile.RewardData.CurrentActiveDailySlot.Value = (_profile.RewardData.CurrentActiveDailySlot.Value + 1) % _rewardView.DailyRewards.Count;
+            _profile.RewardData.CurrentActiveDailySlot.Value = (_profile.RewardData.CurrentActiveDailySlot.Value + 1) % _dailyRewardModel.Rewards.Count;
         }
 
         if (_rewardView.WeeklySlotsParent.gameObject.activeInHierarchy)
         {
-            if (_weeklyRewardReceived)
+            if (_weeklyRewardModel.IsRewardReceived)
                 return;
 
-            var reward = _rewardView.WeeklyRewards[_profile.RewardData.CurrentActiveWeeklySlot.Value];
+            var reward = _weeklyRewardModel.Rewards[_profile.RewardData.CurrentActiveWeeklySlot.Value];
             switch (reward.Type)
             {
                 case RewardType.None:
@@ -227,9 +144,13 @@ public class RewardController : BaseController
             }
 
             _profile.RewardData.LastWeeklyRewardTime.Value = DateTime.UtcNow;
-            _profile.RewardData.CurrentActiveWeeklySlot.Value = (_profile.RewardData.CurrentActiveWeeklySlot.Value + 1) % _rewardView.WeeklyRewards.Count;
+            _profile.RewardData.CurrentActiveWeeklySlot.Value = (_profile.RewardData.CurrentActiveWeeklySlot.Value + 1) % _weeklyRewardModel.Rewards.Count;
         }       
         
-        RefreshRewardState();
+        _rewardRefresher.RefreshRewardState();
+    }
+    private void CloseRewardScreen()
+    {
+        _profile.CurrentState.Value = Profile.GameState.Start;
     }
 }

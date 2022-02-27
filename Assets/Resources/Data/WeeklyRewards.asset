@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7182f1ba635368b438378ec3d872dc3e, type: 3}
+  m_Name: WeeklyRewards
+  m_EditorClassIdentifier: 
+  _timeCooldown: 70
+  _timeDeadline: 140
+  _rewards:
+  - Count: 500
+    Type: 1
+    Icon: {fileID: 21300000, guid: 42ccaf48259dc784aa3cdb5919ad8ce4, type: 3}
+  - Count: 50
+    Type: 2
+    Icon: {fileID: 21300000, guid: 0f10cd40fad6c184492ba13d9837950f, type: 3}
+  - Count: 800
+    Type: 1
+    Icon: {fileID: 21300000, guid: 42ccaf48259dc784aa3cdb5919ad8ce4, type: 3}
+  - Count: 80
+    Type: 2
+    Icon: {fileID: 21300000, guid: 0f10cd40fad6c184492ba13d9837950f, type: 3}
