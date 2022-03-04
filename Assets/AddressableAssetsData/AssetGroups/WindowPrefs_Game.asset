@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WindowPrefs_Game
+  m_EditorClassIdentifier: 
+  m_GroupName: WindowPrefs_Game
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fa0ec152f39030041b7b9759c5d851f0
+  m_SerializeEntries:
+  - m_GUID: fc5d978739b1ef048bfa075070aeba34
+    m_Address: Prefabs/Game/Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 33b765fecc0a5e84d8c2a5aee1c58341
+    m_Address: Prefabs/Game/Car
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2bd873027e9fc54f92644eae49e252d
+    m_Address: Prefabs/Game/EndlessMove
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d0aa592007ba924e86469ff13bfbf41
+    m_Address: Prefabs/Game/FloatStick
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2e2cc712af921db4490b9a5bd060144a
+    m_Address: Prefabs/Game/PauseButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6aa81adb621a9c84a979bdabe6abb3aa
+    m_Address: Prefabs/Game/StickControl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a7b98cec11296184086691e009dd6fa1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1425577a5b4c92c4e8128ee616c19a9f, type: 2}
+    - {fileID: 11400000, guid: fa6958ed22f83d94db012e75464b07bc, type: 2}

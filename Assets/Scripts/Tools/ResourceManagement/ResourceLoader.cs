@@ -1,5 +1,7 @@
 ﻿using UI;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class ResourceLoader
 {
@@ -13,15 +15,15 @@ public static class ResourceLoader
         return Resources.Load<T>(path.PathResource);
     }
 
-    public static T LoadAndInstantiateView<T>(ResourcePath path, Transform uiRoot) where T:Component, IView
+    public static AsyncOperationHandle<GameObject> LoadAndInstantiatePrefab(AssetReference assetReference, Transform uiRoot)
     {
-        var prefab = Resources.Load<GameObject>(path.PathResource);
-        var go = GameObject.Instantiate(prefab, uiRoot);
-        return go.GetComponent<T>();
+        return Addressables.InstantiateAsync(assetReference, uiRoot); 
     }
 
-    public static BaseDataSource<T> LoadDataSource<T>(ResourcePath path) where T : ScriptableObject
+    public static T LoadDataSource<T>(AssetReference assetReference)
     {
-        return Resources.Load<BaseDataSource<T>>(path.PathResource);
+        return Addressables.LoadAssetAsync<T>(assetReference).Result;
     }
+
+    //var pref = Addressables.LoadAssetAsync<GameObject>(_prefab);
 } 

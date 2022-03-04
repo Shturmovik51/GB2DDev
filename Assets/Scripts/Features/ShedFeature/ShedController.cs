@@ -8,7 +8,6 @@ public class ShedController : BaseController, IShedController
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _inventoryModel;
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/GarageMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly ShedView _view;
     private bool _isFirstStart = true;
@@ -75,7 +74,9 @@ public class ShedController : BaseController, IShedController
 
     private ShedView LoadView(Transform placeForUi)
     {
-        return ResourceLoader.LoadAndInstantiateView<ShedView>(_viewPath, placeForUi);       
+        var handle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.GarageMenu, placeForUi);
+        AddAsyncHamdle(handle);
+        return handle.Result.GetComponent<ShedView>();
     }
 
     private void StartGame()

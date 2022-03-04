@@ -1,6 +1,8 @@
 ﻿using Profile;
 using Saves;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +17,6 @@ public class MainController : BaseController
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private FightController _fightController;
-    private ResourcePath _rewardView = new ResourcePath { PathResource = "Prefabs/Rewards/RewardWindow" };
-    private ResourcePath _fightView = new ResourcePath { PathResource = "Prefabs/Fight/FightWindowView" };
-    private ResourcePath _currencyView = new ResourcePath { PathResource = "Prefabs/Rewards/CurrencyWindow" };
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItemConfigs;
 
@@ -26,12 +25,12 @@ public class MainController : BaseController
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
     {
         _placeForUi = placeForUi;
-        _profilePlayer = profilePlayer;        
-        var upgradeSource = (UpgradeItemConfigDataSource)Resources.Load("Data/UpgradeSource");
-        var abilitiesSource = (AbilityItemConfigDataSource)Resources.Load("Data/AbilitiesSource");
-        _upgradeItemConfigs = upgradeSource.UpgradesConfigs;
-        _abilityItemConfigs = abilitiesSource.AbilitiesConfigs;
-
+        _profilePlayer = profilePlayer;
+        var v = Addressables.LoadAssetAsync<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource);
+        _upgradeItemConfigs = v.Result.UpgradesConfigs;
+        //_abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
+        //_upgradeItemConfigs = ResourceLoader.LoadDataSource<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource).UpgradesConfigs;
+        //_abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
@@ -86,19 +85,19 @@ public class MainController : BaseController
 
     private RewardController CreateRewardController()
     {
-        var rewardView = ResourceLoader.LoadAndInstantiateView<RewardView>(_rewardView, _placeForUi);
+        var rewardViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.RewardWindow, _placeForUi);
         var saveDataRepository = new SaveDataRepository();
         saveDataRepository.Initialization();
-        var currencyView = ResourceLoader.LoadAndInstantiateView<CurrencyWindow>(_currencyView, _placeForUi);
-        var controller = new RewardController(rewardView, currencyView, saveDataRepository, _profilePlayer);
+        var currencyViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.CurrencyWindow, _placeForUi);
+        var controller = new RewardController(rewardViewHandle, currencyViewHandle, saveDataRepository, _profilePlayer);
         AddController(controller);
         return controller;
     }
 
     private FightController CreateFightController()
     {
-        var fightView = ResourceLoader.LoadAndInstantiateView<FightWindowView>(_fightView, _placeForUi);        
-        var fightController = new FightController(fightView, _profilePlayer);
+        var fightViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.FightWindowView, _placeForUi);        
+        var fightController = new FightController(fightViewHandle, _profilePlayer);
         AddController(fightController);
         return fightController;
     }

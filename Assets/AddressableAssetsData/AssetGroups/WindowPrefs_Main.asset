@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: WindowPrefs_Main
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: WindowPrefs_Main
   m_Data:
     m_SerializedData: []
-  m_GUID: f1f1deda32e5ab840868d2dac10c5ec2
-  m_SerializeEntries: []
+  m_GUID: 95fa351b4188fea4ea9ad8feddfe3e33
+  m_SerializeEntries:
+  - m_GUID: f73b5ceaabd6ca94b894ab0f3d4f7577
+    m_Address: Prefabs/mainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a7b98cec11296184086691e009dd6fa1, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 7a4043c720461ab43869972ae6961a24, type: 2}
-    - {fileID: 11400000, guid: bad566b0fe541dc4587d0a0ca5a144f5, type: 2}
+    - {fileID: 11400000, guid: c2c26fcddf53844448f8ac3659c73a09, type: 2}
+    - {fileID: 11400000, guid: 70d13b5d00423c443ab6965a5c3f17c3, type: 2}
