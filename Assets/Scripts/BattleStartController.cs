@@ -12,7 +12,7 @@ public class BattleStartController : BaseController
         _view = viewHandle.Result.GetComponent<BattleStart>();
         _model = model;
         _view.Init(StartBattle);
-        AddAsyncHamdle(viewHandle);
+        AddAsyncHandle(viewHandle);
     }
 
     private void StartBattle()

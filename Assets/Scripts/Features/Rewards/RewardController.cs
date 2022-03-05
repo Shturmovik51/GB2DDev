@@ -47,8 +47,8 @@ public class RewardController : BaseController
         _rewardRefresher.RefreshUi();
         SubscribeButtons();
 
-        AddAsyncHamdle(rewardViewHandle);
-        AddAsyncHamdle(currencyWindowHandle);
+        AddAsyncHandle(rewardViewHandle);
+        AddAsyncHandle(currencyWindowHandle);
         //AddGameObjects(_rewardView.gameObject);
         //AddGameObjects(currencyWindow.gameObject);
 

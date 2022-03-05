@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -22,8 +23,18 @@ public static class ResourceLoader
 
     public static T LoadDataSource<T>(AssetReference assetReference)
     {
-        return Addressables.LoadAssetAsync<T>(assetReference).Result;
+        //return Addressables.LoadAssetAsync<T>(assetReference).Result;
+
+        var handle = assetReference.LoadAssetAsync<T>();
+       // await handle.Task;
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            //configs = handle.Result.;
+            Addressables.Release(handle);
+        }
+        return handle.Result;
     }
 
     //var pref = Addressables.LoadAssetAsync<GameObject>(_prefab);
-} 
+}

@@ -19,7 +19,7 @@ public class MainMenuController : BaseController
     private MainMenuView LoadView(Transform placeForUi)
     {
         var viewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.MainMenu, placeForUi);
-        AddAsyncHamdle(viewHandle);
+        AddAsyncHandle(viewHandle);
         return viewHandle.Result.GetComponent<MainMenuView>();
     }
 

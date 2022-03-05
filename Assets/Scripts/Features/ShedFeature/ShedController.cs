@@ -75,7 +75,7 @@ public class ShedController : BaseController, IShedController
     private ShedView LoadView(Transform placeForUi)
     {
         var handle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.GarageMenu, placeForUi);
-        AddAsyncHamdle(handle);
+        AddAsyncHandle(handle);
         return handle.Result.GetComponent<ShedView>();
     }
 

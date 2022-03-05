@@ -24,7 +24,7 @@ public class FightController : BaseController
     {
         _view = viewHandle.Result.GetComponent<FightWindowView>();
         _profilePlayer = profilePlayer;
-        AddAsyncHamdle(viewHandle);
+        AddAsyncHandle(viewHandle);
         CreateParticipants();
         InitView();
     }

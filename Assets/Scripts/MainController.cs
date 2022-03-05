@@ -17,8 +17,8 @@ public class MainController : BaseController
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private FightController _fightController;
-    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
-    private readonly IReadOnlyList<AbilityItemConfig> _abilityItemConfigs;
+    private IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
+    private IReadOnlyList<AbilityItemConfig> _abilityItemConfigs;
 
     private InventoryModel _inventoryModel;
 
@@ -26,13 +26,44 @@ public class MainController : BaseController
     {
         _placeForUi = placeForUi;
         _profilePlayer = profilePlayer;
-        var v = Addressables.LoadAssetAsync<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource);
-        _upgradeItemConfigs = v.Result.UpgradesConfigs;
-        //_abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
+
         //_upgradeItemConfigs = ResourceLoader.LoadDataSource<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource).UpgradesConfigs;
         //_abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
+
+        Load();
+
+        //while (_upgradeItemConfigs == null)
+        //{
+
+        //}
+
+        Load2();
+
+
         OnChangeGameState(_profilePlayer.CurrentState.Value);
-        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+        _profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+    }
+
+    private async void Load()
+    {
+        var handle = ResourceReferences.UpgradeSource.LoadAssetAsync<UpgradeItemConfigDataSource>();
+        await handle.Task;
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            _upgradeItemConfigs = handle.Result.UpgradesConfigs.ToList();
+            Debug.Log(_upgradeItemConfigs);
+            Addressables.Release(handle);
+        }
+    }
+    private async void Load2()
+    {
+        var handle = ResourceReferences.AbilitiesSource.LoadAssetAsync<AbilityItemConfigDataSource>();
+        await handle.Task;
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            _abilityItemConfigs = handle.Result.AbilitiesConfigs;
+            Addressables.Release(handle);
+        }
     }
 
     protected override void OnDispose()
@@ -48,6 +79,7 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
+                Debug.Log(_upgradeItemConfigs);
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose(); 
                 _rewardController?.Dispose();

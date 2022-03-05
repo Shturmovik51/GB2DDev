@@ -25,7 +25,7 @@ public class AbilitiesController : BaseController
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
         _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
 
-        AddAsyncHamdle(abilityCollectionViewHandle);
+        AddAsyncHandle(abilityCollectionViewHandle);
     }
 
     private void OnAbilityUseRequested(object sender, AbilityItem e)

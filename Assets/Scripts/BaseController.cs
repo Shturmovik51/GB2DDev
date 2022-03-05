@@ -47,7 +47,7 @@ public class BaseController : IDisposable
         _gameObjects.Add(gameObject);
     }
 
-    protected void AddAsyncHamdle(AsyncOperationHandle<GameObject> handle)
+    protected void AddAsyncHandle(AsyncOperationHandle<GameObject> handle)
     {
         _handls.Add(handle);
     }
