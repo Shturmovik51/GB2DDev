@@ -12,6 +12,7 @@ public class MainController : BaseController
     private GameController _gameController;
     private RewardController _rewardController;
     private InventoryController _inventoryController;
+    private LocalizationController _localizationController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private FightController _fightController;
@@ -52,11 +53,17 @@ public class MainController : BaseController
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose(); 
                 _rewardController?.Dispose();
+                _localizationController?.Dispose();
                 // _inventoryController?.Dispose();                
                 break;
 
             case GameState.Rewards:
                 _rewardController = CreateRewardController();
+                _mainMenuController?.Dispose();
+                break;
+
+            case GameState.Localization:
+                _localizationController = CreateLocalizationController();
                 _mainMenuController?.Dispose();
                 break;
 
@@ -102,7 +109,13 @@ public class MainController : BaseController
         AddController(fightController);
         return fightController;
     }
-
+    private LocalizationController CreateLocalizationController()
+    {
+        var localizationView = ResourceLoader.LoadAndInstantiateView<LocalizationView>(ResourcePaths.LocalizationViewPath, _placeForUi);
+        var localizationController = new LocalizationController(localizationView, _profilePlayer);
+        AddController(localizationController);
+        return localizationController;
+    }
 
     private void AllClear()
     {

@@ -6,4 +6,5 @@ public static class ResourcePaths
 {
     public static readonly ResourcePath DailyRewardsPath = new ResourcePath() { PathResource = "Data/DailyRewards" };
     public static readonly ResourcePath WeeklyRewardsPath = new ResourcePath() { PathResource = "Data/WeeklyRewards" };
+    public static readonly ResourcePath LocalizationViewPath = new ResourcePath() { PathResource = "Prefabs/Localization/LocalizationWindow" };
 }
