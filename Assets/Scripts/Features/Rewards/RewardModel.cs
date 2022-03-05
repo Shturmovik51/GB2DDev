@@ -11,6 +11,7 @@ public class RewardModel
     public List<SlotRewardView> RewardSlots { get; private set; }
     public bool IsRewardReceived { get; private set; }
     public Transform ParentTransform { get; }
+    public bool IsNotified { get; set; }
 
 
     public RewardModel(ResourcePath path, Transform slotParent)

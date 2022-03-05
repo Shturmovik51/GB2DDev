@@ -13,11 +13,6 @@ public class LocalizationView : MonoBehaviour, IView
     [SerializeField] private Button _buttonPrefab;
     [SerializeField] private Button _outButton;
 
-    private void Start()
-    {
-       // StartCoroutine(WaitLocale());
-    }
-
     public void StartCor(UnityAction Out)
     {
         StartCoroutine(WaitLocale());

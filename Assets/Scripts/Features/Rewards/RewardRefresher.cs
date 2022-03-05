@@ -5,10 +5,12 @@ using UnityEngine;
 public class RewardRefresher: BaseController
 {
     private List<RewardRefresherModel> modelsForUpdate;
+    private NotificationsController _notificationsController;
 
-    public RewardRefresher()
+    public RewardRefresher(NotificationsController notificationsController)
     {
         modelsForUpdate = new List<RewardRefresherModel>();
+        _notificationsController = notificationsController;
     }
 
     public void AddModel(RewardRefresherModel model)
@@ -58,7 +60,15 @@ public class RewardRefresher: BaseController
 
             var dayDelta = nextBonusTime - DateTime.UtcNow;
             if (dayDelta.TotalSeconds < 0)
+            {
                 dayDelta = new TimeSpan(0);
+
+                if (!model.RewardModel.IsNotified)
+                {
+                    _notificationsController.CreateNotification("Some rewards awaiting you");
+                    model.RewardModel.IsNotified = true;
+                }
+            }
 
             model.RewardTimer.text = dayDelta.ToString();
 
