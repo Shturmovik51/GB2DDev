@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Tools;
+﻿using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
 using UnityEngine;
 
 public class RewardModel
@@ -12,10 +11,9 @@ public class RewardModel
     public bool IsRewardReceived { get; private set; }
     public Transform ParentTransform { get; }
 
-
-    public RewardModel(ResourcePath path, Transform slotParent)
+    public RewardModel(AssetReference assetReference, Transform slotParent)
     {
-        var rewardsConfig = ResourceLoader.LoadObject<RewardItemConfig>(path);
+        var rewardsConfig = ResourceLoader.LoadDataSource<RewardItemConfig>(assetReference);
 
         Rewards = rewardsConfig.Rewards;
         TimeCooldown = rewardsConfig.TimeCooldown;

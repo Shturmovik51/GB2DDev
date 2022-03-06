@@ -1,31 +1,31 @@
 ﻿using Saves;
-using DG.Tweening;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using UnityEngine.AddressableAssets;
 using Tools;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class RewardController : BaseController
 {
     private readonly RewardView _rewardView;
+    private readonly CurrencyWindow _currencyWindow;
     private readonly RewardModel _dailyRewardModel;
     private readonly RewardModel _weeklyRewardModel;
     private SaveDataRepository _saveDataRepository;
     private RewardRefresher _rewardRefresher;
     private ProfilePlayer _profile;
 
-    public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, ProfilePlayer profile)
+    public RewardController(AsyncOperationHandle<GameObject> rewardViewHandle, AsyncOperationHandle<GameObject> currencyWindowHandle, 
+                                SaveDataRepository saveDataRepository, ProfilePlayer profile)
     {
-        _rewardView = rewardView;
-
-        _dailyRewardModel = new RewardModel(ResourcePaths.DailyRewardsPath, rewardView.DailySlotsParent);
-        _weeklyRewardModel = new RewardModel(ResourcePaths.WeeklyRewardsPath, rewardView.WeeklySlotsParent);
-        _dailyRewardModel.InitSlots(rewardView.SlotPrefab);
-        _weeklyRewardModel.InitSlots(rewardView.SlotPrefab);
+        _rewardView = rewardViewHandle.Result.GetComponent<RewardView>();
+        _currencyWindow = currencyWindowHandle.Result.GetComponent<CurrencyWindow>();
+        _dailyRewardModel = new RewardModel(ResourceReferences.DailyRewards, _rewardView.DailySlotsParent);
+        _weeklyRewardModel = new RewardModel(ResourceReferences.WeeklyRewards, _rewardView.WeeklySlotsParent);
+        _dailyRewardModel.InitSlots(_rewardView.SlotPrefab);
+        _weeklyRewardModel.InitSlots(_rewardView.SlotPrefab);
 
         var dailyRewardRefreshModel = new RewardRefresherModel(_dailyRewardModel, profile.RewardData.LastDailyRewardTime, 
                                                             _rewardView.DailyRewardTimer, _rewardView.DailyRewardTimerImage, 
@@ -41,14 +41,16 @@ public class RewardController : BaseController
 
         _saveDataRepository = saveDataRepository;
         _profile = profile;
-        currencyWindow.Init(profile.RewardData.Diamond, profile.RewardData.Wood);
+        _currencyWindow.Init(profile.RewardData.Diamond, profile.RewardData.Wood);
         //saveDataRepository.Load();
 
         _rewardRefresher.RefreshUi();
         SubscribeButtons();
 
-        AddGameObjects(_rewardView.gameObject);
-        AddGameObjects(currencyWindow.gameObject);
+        AddAsyncHandle(rewardViewHandle);
+        AddAsyncHandle(currencyWindowHandle);
+        //AddGameObjects(_rewardView.gameObject);
+        //AddGameObjects(currencyWindow.gameObject);
 
         _rewardView.StartCoroutine(UpdateCoroutine());
         _rewardView.ShowDailyRewardsButton.onClick.Invoke();

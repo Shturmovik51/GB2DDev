@@ -2,7 +2,6 @@
 
 public class CarController : BaseController, IAbilityActivator
 {
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/Game/Car"};
     private readonly CarView _carView;
 
     public CarController()
@@ -12,10 +11,9 @@ public class CarController : BaseController, IAbilityActivator
 
     private CarView LoadView()
     {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
-        AddGameObjects(objView);
-        
-        return objView.GetComponent<CarView>();
+        var objView = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.Car, null);        
+        AddAsyncHandle(objView);        
+        return objView.Result.GetComponent<CarView>();
     }
 
     public GameObject GetViewObject()

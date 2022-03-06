@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WindowPrefs_Abilities
+  m_EditorClassIdentifier: 
+  m_GroupName: WindowPrefs_Abilities
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f1f1deda32e5ab840868d2dac10c5ec2
+  m_SerializeEntries:
+  - m_GUID: 5606d427c746d424da45beaee1204bf0
+    m_Address: Prefabs/Abilities/AbilitiesView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 96fb214e93d7ba84098cdd461693c6f0
+    m_Address: Prefabs/Abilities/AbilityItemView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 44eb27282cac35e4bbc56d3fd9cc795e
+    m_Address: Prefabs/Abilities/CannonBomb.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21557ec7489113c489c0431c76a7d14d
+    m_Address: Prefabs/Abilities/Shield.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c1d2d9d15ac0e5c49bae46e99e990407
+    m_Address: Prefabs/Abilities/Smoke.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a7b98cec11296184086691e009dd6fa1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7a4043c720461ab43869972ae6961a24, type: 2}
+    - {fileID: 11400000, guid: bad566b0fe541dc4587d0a0ca5a144f5, type: 2}

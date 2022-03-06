@@ -1,15 +1,18 @@
 ﻿using Profile;
+using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class BattleStartController : BaseController
 {
     private readonly BattleStart _view;
     private readonly ProfilePlayer _model;
 
-    public BattleStartController(BattleStart view, ProfilePlayer model)
+    public BattleStartController(AsyncOperationHandle<GameObject> viewHandle, ProfilePlayer model)
     {
-        _view = view;
+        _view = viewHandle.Result.GetComponent<BattleStart>();
         _model = model;
         _view.Init(StartBattle);
+        AddAsyncHandle(viewHandle);
     }
 
     private void StartBattle()

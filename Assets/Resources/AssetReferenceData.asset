@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c8eef34320bc442a2d6b1bf622d23b, type: 3}
+  m_Name: AssetReferenceData
+  m_EditorClassIdentifier: 
+  <AbilitiesView>k__BackingField:
+    m_AssetGUID: 5606d427c746d424da45beaee1204bf0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <AbilityItemView>k__BackingField:
+    m_AssetGUID: 96fb214e93d7ba84098cdd461693c6f0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <CannonBomb>k__BackingField:
+    m_AssetGUID: 44eb27282cac35e4bbc56d3fd9cc795e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <Shield>k__BackingField:
+    m_AssetGUID: 21557ec7489113c489c0431c76a7d14d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <Smoke>k__BackingField:
+    m_AssetGUID: c1d2d9d15ac0e5c49bae46e99e990407
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <FightButton>k__BackingField:
+    m_AssetGUID: e32e1eddc84e65648a4fbe7d48a3099e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <FightWindowView>k__BackingField:
+    m_AssetGUID: 4fd2dae535182214e9aa985bdbbca3bd
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <ContainerCountCurrency>k__BackingField:
+    m_AssetGUID: 1628e41bb284e1d4ca5163b10c872edc
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <ContainerSlotReward>k__BackingField:
+    m_AssetGUID: 33bd027193450fb489f80f6e5e3f39a9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <CurrencyWindow>k__BackingField:
+    m_AssetGUID: 00b560fdc2fbe4d4e8022d2d6dd417f1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <RewardWindow>k__BackingField:
+    m_AssetGUID: 96c87ef0a914e6b4d89b67c95c9d602e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <BackGround>k__BackingField:
+    m_AssetGUID: fc5d978739b1ef048bfa075070aeba34
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <Car>k__BackingField:
+    m_AssetGUID: 33b765fecc0a5e84d8c2a5aee1c58341
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <EndlessMove>k__BackingField:
+    m_AssetGUID: f2bd873027e9fc54f92644eae49e252d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <FloatStick>k__BackingField:
+    m_AssetGUID: 6d0aa592007ba924e86469ff13bfbf41
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <PauseButton>k__BackingField:
+    m_AssetGUID: 2e2cc712af921db4490b9a5bd060144a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <StickControl>k__BackingField:
+    m_AssetGUID: 6aa81adb621a9c84a979bdabe6abb3aa
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <GarageMenu>k__BackingField:
+    m_AssetGUID: ffbd6c7fe51c58841a481988c8ac4f1b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <UpgradeItemView>k__BackingField:
+    m_AssetGUID: 1b2ea5385d7a85240878a9af0dbca354
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <MainMenu>k__BackingField:
+    m_AssetGUID: f73b5ceaabd6ca94b894ab0f3d4f7577
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <DailyRewards>k__BackingField:
+    m_AssetGUID: 6800b53bf0d946044ab2a836cd004d17
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <WeeklyRewards>k__BackingField:
+    m_AssetGUID: a95b09b9dc77639409f7741730d0a548
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <UpgradeSource>k__BackingField:
+    m_AssetGUID: 4b0ac3781b2cd5f40bb67ec9c9e1cd6b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <AbilitiesSource>k__BackingField:
+    m_AssetGUID: 19c209d1ef271b141b0f25629effba01
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class TapeBackgroundController : BaseController
 {
+    private TapeBackgroundView _view;
+    private readonly SubscriptionProperty<float> _diff;
+    private readonly IReadOnlySubscriptionProperty<float> _leftMove;
+    private readonly IReadOnlySubscriptionProperty<float> _rightMove;
+
     public TapeBackgroundController(IReadOnlySubscriptionProperty<float> leftMove, 
         IReadOnlySubscriptionProperty<float> rightMove)
     {
@@ -18,12 +23,6 @@ public class TapeBackgroundController : BaseController
         _rightMove.SubscribeOnChange(Move);
     }
     
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/Game/Background"};
-    private TapeBackgroundView _view;
-    private readonly SubscriptionProperty<float> _diff;
-    private readonly IReadOnlySubscriptionProperty<float> _leftMove;
-    private readonly IReadOnlySubscriptionProperty<float> _rightMove;
-
     protected override void OnDispose()
     {
         _leftMove.UnSubscriptionOnChange(Move);
@@ -34,10 +33,9 @@ public class TapeBackgroundController : BaseController
 
     private TapeBackgroundView LoadView()
     {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
-        AddGameObjects(objView);
-        
-        return objView.GetComponent<TapeBackgroundView>();
+        var objViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.BackGround, null);
+        AddAsyncHandle(objViewHandle);        
+        return objViewHandle.Result.GetComponent<TapeBackgroundView>();
     }
 
     private void Move(float value)

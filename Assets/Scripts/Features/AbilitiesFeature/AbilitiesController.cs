@@ -2,6 +2,8 @@
 using Features.AbilitiesFeature;
 using JetBrains.Annotations;
 using Tools;
+using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AbilitiesController : BaseController
 {
@@ -14,14 +16,16 @@ public class AbilitiesController : BaseController
         [NotNull] IAbilityActivator abilityActivator,
         [NotNull] IInventoryModel inventoryModel,
         [NotNull] IRepository<int, IAbility> abilityRepository,
-        [NotNull] IAbilityCollectionView abilityCollectionView)
+        [NotNull] AsyncOperationHandle<GameObject> abilityCollectionViewHandle)
     {
         _abilityActivator = abilityActivator ?? throw new ArgumentNullException(nameof(abilityActivator));
         _inventoryModel = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
         _abilityRepository = abilityRepository ?? throw new ArgumentNullException(nameof(abilityRepository));
-        _abilityCollectionView = abilityCollectionView ?? throw new ArgumentNullException(nameof(abilityCollectionView));
+        _abilityCollectionView = abilityCollectionViewHandle.Result.GetComponent<IAbilityCollectionView>() ?? throw new ArgumentNullException(nameof(abilityCollectionViewHandle));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
         _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+
+        AddAsyncHandle(abilityCollectionViewHandle);
     }
 
     private void OnAbilityUseRequested(object sender, AbilityItem e)

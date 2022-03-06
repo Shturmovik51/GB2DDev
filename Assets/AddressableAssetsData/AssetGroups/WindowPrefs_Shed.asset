@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WindowPrefs_Shed
+  m_EditorClassIdentifier: 
+  m_GroupName: WindowPrefs_Shed
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ef4e1aad3441ec34c937f6e97883ba4c
+  m_SerializeEntries:
+  - m_GUID: ffbd6c7fe51c58841a481988c8ac4f1b
+    m_Address: Prefabs/GarageMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b2ea5385d7a85240878a9af0dbca354
+    m_Address: Prefabs/UpgradeItemView
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a7b98cec11296184086691e009dd6fa1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 52075941094ef224db5efb393f0f50e9, type: 2}
+    - {fileID: 11400000, guid: 899ed6b4d851ccf4d8ba351c2a04b5a6, type: 2}

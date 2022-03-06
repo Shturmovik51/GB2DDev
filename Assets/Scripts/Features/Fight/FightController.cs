@@ -1,4 +1,6 @@
 ﻿using Profile;
+using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class FightController : BaseController
 {
@@ -18,11 +20,11 @@ public class FightController : BaseController
 
     private UiListener _uiListener;
 
-    public FightController(FightWindowView view, ProfilePlayer profilePlayer)
+    public FightController(AsyncOperationHandle<GameObject> viewHandle, ProfilePlayer profilePlayer)
     {
-        _view = view;
+        _view = viewHandle.Result.GetComponent<FightWindowView>();
         _profilePlayer = profilePlayer;
-        AddGameObjects(view.gameObject);
+        AddAsyncHandle(viewHandle);
         CreateParticipants();
         InitView();
     }

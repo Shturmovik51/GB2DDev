@@ -24,30 +24,31 @@ public class GameController : BaseController
         var abilityRepository = new AbilityRepository(inventoryModel.GetEquippedItems());
         AddController(abilityRepository);
 
-        var abilityView =
-            ResourceLoader.LoadAndInstantiateView<AbilitiesView>(
-                new ResourcePath() { PathResource = "Prefabs/Abilities/AbilitiesView" }, uiRoot);
-        AddGameObjects(abilityView.gameObject);
-
-        var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository, abilityView);
+        var abilitiesController = CreateAbilitiesController(uiRoot, carController, inventoryModel, abilityRepository);
         AddController(abilitiesController);
 
-        var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Game/PauseButton"), uiRoot);
-        var pauseButton = pauseButtonObj.GetComponent<Button>();
+        var pauseButtonHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.PauseButton, uiRoot);
+        var pauseButton = pauseButtonHandle.Result.GetComponent<Button>();
 
         pauseButton.onClick.AddListener(() => shedController.ChangeShedViewActiveState(true));
 
-        AddGameObjects(pauseButtonObj);
+        AddAsyncHandle(pauseButtonHandle);
 
         var battlestartController = CreateBattleStartController(uiRoot, profilePlayer);
         AddController(battlestartController);
     }
 
+    private AbilitiesController CreateAbilitiesController(Transform uiRoot, CarController carController, 
+                                                    InventoryModel inventoryModel, AbilityRepository abilityRepository)
+    {
+        var abilityViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.AbilitiesView, uiRoot); 
+        return new AbilitiesController(carController, inventoryModel, abilityRepository, abilityViewHandle);
+    }
+
     private BattleStartController CreateBattleStartController(Transform uiRoot, ProfilePlayer profilePlayer)
     {
-        var startView = ResourceLoader.LoadAndInstantiateView<BattleStart>(new ResourcePath() { PathResource = "Prefabs/Fight/FightButton" }, uiRoot);
-        AddGameObjects(startView.gameObject);
-        return new BattleStartController(startView, profilePlayer);
+        var startViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.FightButton, uiRoot);        
+        return new BattleStartController(startViewHandle, profilePlayer);
     }
 }
 
