@@ -47,7 +47,6 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                Debug.Log(_upgradeItemConfigs);
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose(); 
                 _rewardController?.Dispose();
