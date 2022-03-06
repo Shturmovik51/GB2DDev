@@ -12,6 +12,8 @@ public class MainController : BaseController
     private GameController _gameController;
     private RewardController _rewardController;
     private InventoryController _inventoryController;
+    private LocalizationController _localizationController;
+    private NotificationsController _notificationsController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private FightController _fightController;
@@ -31,7 +33,7 @@ public class MainController : BaseController
         var abilitiesSource = (AbilityItemConfigDataSource)Resources.Load("Data/AbilitiesSource");
         _upgradeItemConfigs = upgradeSource.UpgradesConfigs;
         _abilityItemConfigs = abilitiesSource.AbilitiesConfigs;
-
+        _notificationsController = new NotificationsController();
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
@@ -50,17 +52,27 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                _notificationsController.CreateNotification("Enter Start Game");
                 _gameController?.Dispose(); 
                 _rewardController?.Dispose();
+                _localizationController?.Dispose();
                 // _inventoryController?.Dispose();                
                 break;
 
             case GameState.Rewards:
+                _notificationsController.CreateNotification("Enter Rewards");
                 _rewardController = CreateRewardController();
                 _mainMenuController?.Dispose();
                 break;
 
+            case GameState.Localization:
+                _notificationsController.CreateNotification("Enter Localization");
+                _localizationController = CreateLocalizationController();
+                _mainMenuController?.Dispose();
+                break;
+
             case GameState.Garage:
+                _notificationsController.CreateNotification("Enter Garage");
                 _inventoryModel = new InventoryModel();
                 _inventoryController = new InventoryController(_upgradeItemConfigs, _abilityItemConfigs, _inventoryModel);
                 _shedController = new ShedController(_upgradeItemConfigs, _profilePlayer, _inventoryModel, _inventoryController, _placeForUi);                
@@ -69,12 +81,14 @@ public class MainController : BaseController
                 break;
 
             case GameState.Game:
+                _notificationsController.CreateNotification("Game Started");
                 _shedController.Exit();
                 _gameController = new GameController(_profilePlayer, _inventoryModel, _placeForUi, _shedController);
                 _fightController?.Dispose();
                 break;
 
             case GameState.Fight:
+                _notificationsController.CreateNotification("Enter FightMode");
                 _fightController = CreateFightController();                
                 _gameController?.Dispose();
                 break;
@@ -90,7 +104,7 @@ public class MainController : BaseController
         var saveDataRepository = new SaveDataRepository();
         saveDataRepository.Initialization();
         var currencyView = ResourceLoader.LoadAndInstantiateView<CurrencyWindow>(_currencyView, _placeForUi);
-        var controller = new RewardController(rewardView, currencyView, saveDataRepository, _profilePlayer);
+        var controller = new RewardController(rewardView, currencyView, saveDataRepository, _notificationsController, _profilePlayer);
         AddController(controller);
         return controller;
     }
@@ -102,7 +116,13 @@ public class MainController : BaseController
         AddController(fightController);
         return fightController;
     }
-
+    private LocalizationController CreateLocalizationController()
+    {
+        var localizationView = ResourceLoader.LoadAndInstantiateView<LocalizationView>(ResourcePaths.LocalizationViewPath, _placeForUi);
+        var localizationController = new LocalizationController(localizationView, _profilePlayer);
+        AddController(localizationController);
+        return localizationController;
+    }
 
     private void AllClear()
     {

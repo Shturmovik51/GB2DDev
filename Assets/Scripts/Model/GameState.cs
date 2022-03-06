@@ -7,7 +7,8 @@
         Rewards = 2,
         Garage = 3,
         Game = 4,
-        Fight = 5
+        Fight = 5,
+        Localization = 6
     }
 }
 

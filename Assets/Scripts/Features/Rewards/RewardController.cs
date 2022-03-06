@@ -18,7 +18,8 @@ public class RewardController : BaseController
     private RewardRefresher _rewardRefresher;
     private ProfilePlayer _profile;
 
-    public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, ProfilePlayer profile)
+    public RewardController(RewardView rewardView, CurrencyWindow currencyWindow, SaveDataRepository saveDataRepository, 
+                                NotificationsController notificationsController, ProfilePlayer profile)
     {
         _rewardView = rewardView;
 
@@ -33,7 +34,7 @@ public class RewardController : BaseController
         var weeklyRewardRefreshModel = new RewardRefresherModel(_weeklyRewardModel, profile.RewardData.LastWeeklyRewardTime,
                                                             _rewardView.WeeklyRewardTimer, _rewardView.WeeklyRewardTimerImage, 
                                                             profile.RewardData.CurrentActiveWeeklySlot, _rewardView.GetRewardButton);
-        _rewardRefresher = new RewardRefresher();
+        _rewardRefresher = new RewardRefresher(notificationsController);
         AddController(_rewardRefresher);
 
         _rewardRefresher.AddModel(dailyRewardRefreshModel);
@@ -133,6 +134,7 @@ public class RewardController : BaseController
             }
             lastRewardTime.Value = DateTime.UtcNow;
             currentActiveSlot.Value = (currentActiveSlot.Value + 1) % model.Rewards.Count;
+            model.IsNotified = false;
         }
 
         _rewardRefresher.RefreshRewardState();
