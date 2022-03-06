@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryView : IInventoryView
 {
@@ -10,7 +9,8 @@ public class InventoryView : IInventoryView
     private Action<UpgradeItem> _refreshInventory;
     public InventoryView(Action<UpgradeItem> refreshInventory)
     {
-        _upgradeItemPref = (GameObject)Resources.Load("Prefabs/UpgradeItemView");
+        var handle = ResourceLoader.LoadPrefab(ResourceReferences.UpgradeItemView);
+        _upgradeItemPref = (GameObject)handle.Result;
         _refreshInventory = refreshInventory;
     }
 
@@ -31,12 +31,12 @@ public class InventoryView : IInventoryView
 
     public void Show()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Hide()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Init(Transform cellPlace)

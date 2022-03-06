@@ -1,14 +1,20 @@
-﻿using System.Collections.Generic;
-using UI;
+﻿using System.Diagnostics;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class ResourceLoader
 {
-    public static GameObject LoadPrefab(ResourcePath path)
+    public static AsyncOperationHandle LoadPrefab(AssetReference assetReference)
     {
-        return Resources.Load<GameObject>(path.PathResource);
+        var timer = new Stopwatch();
+        timer.Start();
+        var handle = Addressables.LoadAssetAsync<GameObject>(assetReference);
+        handle.WaitForCompletion();
+        timer.Stop();
+        UnityEngine.Debug.Log($"Prefab load {timer.Elapsed.Milliseconds}");
+        return handle;
     }
 
     public static T LoadObject<T>(ResourcePath path) where T:Object
@@ -18,23 +24,25 @@ public static class ResourceLoader
 
     public static AsyncOperationHandle<GameObject> LoadAndInstantiatePrefab(AssetReference assetReference, Transform uiRoot)
     {
-        return Addressables.InstantiateAsync(assetReference, uiRoot); 
+        var timer = new Stopwatch();
+        timer.Start();
+        var handle = Addressables.InstantiateAsync(assetReference, uiRoot);
+        handle.WaitForCompletion();
+        timer.Stop();
+        UnityEngine.Debug.Log($"GO load and instantiate {timer.Elapsed.Milliseconds}");
+        return handle; 
     }
 
     public static T LoadDataSource<T>(AssetReference assetReference)
     {
-        //return Addressables.LoadAssetAsync<T>(assetReference).Result;
-
+        var timer = new Stopwatch();
+        timer.Start();
         var handle = assetReference.LoadAssetAsync<T>();
-       // await handle.Task;
-
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            //configs = handle.Result.;
-            Addressables.Release(handle);
-        }
-        return handle.Result;
+        handle.WaitForCompletion();
+        timer.Stop();
+        UnityEngine.Debug.Log($"AssetReference load {timer.Elapsed.Milliseconds}");
+        var result = handle.Result;
+        Addressables.Release(handle);
+        return result;
     }
-
-    //var pref = Addressables.LoadAssetAsync<GameObject>(_prefab);
 }

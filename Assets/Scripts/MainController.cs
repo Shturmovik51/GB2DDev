@@ -27,43 +27,11 @@ public class MainController : BaseController
         _placeForUi = placeForUi;
         _profilePlayer = profilePlayer;
 
-        //_upgradeItemConfigs = ResourceLoader.LoadDataSource<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource).UpgradesConfigs;
-        //_abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
-
-        Load();
-
-        //while (_upgradeItemConfigs == null)
-        //{
-
-        //}
-
-        Load2();
-
-
+        _upgradeItemConfigs = ResourceLoader.LoadDataSource<UpgradeItemConfigDataSource>(ResourceReferences.UpgradeSource).UpgradesConfigs;
+        _abilityItemConfigs = ResourceLoader.LoadDataSource<AbilityItemConfigDataSource>(ResourceReferences.AbilitiesSource).AbilitiesConfigs;
+         
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         _profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
-    }
-
-    private async void Load()
-    {
-        var handle = ResourceReferences.UpgradeSource.LoadAssetAsync<UpgradeItemConfigDataSource>();
-        await handle.Task;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            _upgradeItemConfigs = handle.Result.UpgradesConfigs.ToList();
-            Debug.Log(_upgradeItemConfigs);
-            Addressables.Release(handle);
-        }
-    }
-    private async void Load2()
-    {
-        var handle = ResourceReferences.AbilitiesSource.LoadAssetAsync<AbilityItemConfigDataSource>();
-        await handle.Task;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            _abilityItemConfigs = handle.Result.AbilitiesConfigs;
-            Addressables.Release(handle);
-        }
     }
 
     protected override void OnDispose()

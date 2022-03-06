@@ -27,12 +27,12 @@ public class GameController : BaseController
         var abilitiesController = CreateAbilitiesController(uiRoot, carController, inventoryModel, abilityRepository);
         AddController(abilitiesController);
 
-        var pauseButtonObj = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Game/PauseButton"), uiRoot);
-        var pauseButton = pauseButtonObj.GetComponent<Button>();
+        var pauseButtonHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.PauseButton, uiRoot);
+        var pauseButton = pauseButtonHandle.Result.GetComponent<Button>();
 
         pauseButton.onClick.AddListener(() => shedController.ChangeShedViewActiveState(true));
 
-        AddGameObjects(pauseButtonObj);
+        AddAsyncHandle(pauseButtonHandle);
 
         var battlestartController = CreateBattleStartController(uiRoot, profilePlayer);
         AddController(battlestartController);
@@ -47,7 +47,7 @@ public class GameController : BaseController
 
     private BattleStartController CreateBattleStartController(Transform uiRoot, ProfilePlayer profilePlayer)
     {
-        var startViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.FightWindowView, uiRoot);        
+        var startViewHandle = ResourceLoader.LoadAndInstantiatePrefab(ResourceReferences.FightButton, uiRoot);        
         return new BattleStartController(startViewHandle, profilePlayer);
     }
 }
