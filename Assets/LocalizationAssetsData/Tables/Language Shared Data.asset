@@ -19,6 +19,26 @@ MonoBehaviour:
     m_Key: MainMenu
     m_Metadata:
       m_Items: []
+  - m_Id: 280296440213504
+    m_Key: Garage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 280489470472192
+    m_Key: Revards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 280519325528064
+    m_Key: Localization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 283467053019136
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 283472014880768
+    m_Key: New Entry 1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

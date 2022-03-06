@@ -22,5 +22,17 @@ MonoBehaviour:
     m_Localized: Main Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 280296440213504
+    m_Localized: Garage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 280489470472192
+    m_Localized: Revards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 280519325528064
+    m_Localized: Localization
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

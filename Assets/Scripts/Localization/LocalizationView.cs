@@ -34,7 +34,7 @@ public class LocalizationView : MonoBehaviour, IView
         var go = GameObject.Instantiate(_buttonPrefab, _buttonsParent);
         var text = go.GetComponentInChildren<TextMeshProUGUI>();
         if (text != null)
-            text.text = locale.Identifier.Code;
+            text.text = locale.Identifier.ToString();
         go.onClick.AddListener(() => LocalizationSettings.SelectedLocale = locale);
     }
 
